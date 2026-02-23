@@ -391,7 +391,7 @@ async function buyCourse(courseId) {
 
     showToast("Connecting to gateway...");
     try {
-        const res = await fetch('http://localhost:5000/api/payment/create-order', {
+        const res = await fetch('https://beatsvibe.space/api/payment/create-order', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ amount: course.numericPrice, courseName: course.title, studentId: user.id })
         });
