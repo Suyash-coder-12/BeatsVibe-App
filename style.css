@@ -1,26 +1,20 @@
-/* Sleek Hacker Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
-.dark ::-webkit-scrollbar-thumb { background: #06b6d4; }
-::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+/* Hide scrollbar for seamless app feel */
+::-webkit-scrollbar { display: none; }
+body { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* App UI hiding scrollbar for mobile feel */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Animations */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
+/* Advanced App Animations */
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
 }
-.animate-fade-in-up { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-slide-up { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-@keyframes pop {
-    0% { transform: scale(0.95); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
 }
-.animate-pop { animation: pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-float { animation: float 6s ease-in-out infinite; }
 
 /* Glassmorphism Panels */
 .glass-panel {
@@ -31,17 +25,18 @@
 }
 .dark .glass-panel {
     background: rgba(15, 23, 42, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Modals */
+/* Modal Overlay */
 .modal-overlay {
     background: rgba(15, 23, 42, 0.85);
     backdrop-filter: blur(12px);
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 100; align-items: center; justify-content: center;
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
 }
 
-/* Bottom Nav Active State */
+/* App Bottom Nav Indicator */
 .nav-active { color: #3b82f6; transform: translateY(-4px); transition: all 0.3s ease; }
 .dark .nav-active { color: #06b6d4; }
