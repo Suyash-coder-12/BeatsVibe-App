@@ -163,7 +163,7 @@ async function buyCourse(courseId) {
 
     showToast("Connecting to gateway...");
     try {
-        const res = await fetch('http://localhost:5000/api/payment/create-order', {
+        const res = await fetch('https://beatsvibeapp.vercel.app//api/payment/create-order', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ amount: course.numericPrice, courseName: course.title, studentId: user.id })
         });
@@ -171,7 +171,7 @@ async function buyCourse(courseId) {
         if (!data.success) return showToast("Server offline. Connect Node.js", "error");
 
         new window.Razorpay({
-            key: "TERI_RAZORPAY_TEST_KEY_ID_YAHA_DAAL", // <-- Razorpay Test Key
+            key: "rzp_test_SJZoROrIWuwQfT", // <-- Razorpay Test Key
             amount: data.order.amount, currency: "INR", name: "BeatsVibe", description: course.title, order_id: data.order.id,
             handler: function (response) {
                 showToast("Payment Successful!", "success");
