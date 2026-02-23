@@ -399,7 +399,7 @@ async function buyCourse(courseId) {
         if (!data.success) return showToast("Server error.", "error");
 
         new window.Razorpay({
-            key: "TERI_RAZORPAY_TEST_KEY_ID_YAHA_DAAL", // IMPORTANT
+            key: "rzp_test_SJZoROrIWuwQfT", // IMPORTANT
             amount: data.order.amount, currency: "INR", name: "BeatsVibe", description: course.title, order_id: data.order.id,
             handler: function (response) {
                 showToast("Payment Successful!", "success");
