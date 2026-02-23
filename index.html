@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BeatsVibe | Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-900 font-['Plus_Jakarta_Sans'] dark:bg-slate-950 dark:text-white h-screen flex flex-col justify-center items-center relative overflow-hidden">
+    
+    <div id="toast-container" class="fixed top-6 right-6 z-[9999] flex flex-col gap-3 w-full px-6 max-w-sm"></div>
+
+    <div class="absolute top-[-10%] left-[-10%] w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float dark:opacity-20"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float dark:opacity-20" style="animation-delay: 2s;"></div>
+
+    <div class="w-full max-w-md px-6 z-10 animate-slide-up">
+        <div class="text-center mb-8">
+            <div class="w-16 h-16 bg-blue-600 rounded-2xl text-white flex items-center justify-center text-2xl shadow-lg shadow-blue-500/50 mx-auto mb-4 animate-pop">B</div>
+            <h1 class="text-3xl font-extrabold tracking-tight">BeatsVibe.</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Sign in to access your academy.</p>
+        </div>
+
+        <div class="glass-panel p-8 rounded-[32px] shadow-2xl relative">
+            
+            <div class="flex bg-slate-100/50 dark:bg-slate-900/50 p-1 rounded-2xl mb-8">
+                <button onclick="toggleLoginType('signin')" id="toggle-signin" class="flex-1 py-3 rounded-xl bg-white dark:bg-slate-800 shadow-md font-bold text-sm transition-all text-blue-600 dark:text-blue-400">Sign In</button>
+                <button onclick="toggleLoginType('signup')" id="toggle-signup" class="flex-1 py-3 rounded-xl text-slate-500 font-bold text-sm transition-all">Sign Up</button>
+            </div>
+
+            <form onsubmit="handleStudentAuth(event)" class="space-y-5 text-left">
+                <div id="signupNameField" class="hidden animate-fade-in-up">
+                    <input type="text" id="authName" placeholder="Full Name" class="w-full p-4 bg-white/50 dark:bg-slate-900/50 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all font-medium backdrop-blur-sm">
+                </div>
+                <div>
+                    <input type="text" id="authId" placeholder="Email or Student ID" class="w-full p-4 bg-white/50 dark:bg-slate-900/50 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all font-medium backdrop-blur-sm" required>
+                </div>
+                <div>
+                    <input type="password" id="authPass" placeholder="Password" class="w-full p-4 bg-white/50 dark:bg-slate-900/50 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all font-medium backdrop-blur-sm" required>
+                </div>
+                <button type="submit" id="authSubmitBtn" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all mt-4 shadow-lg shadow-blue-500/30">Continue <i class="fas fa-arrow-right ml-2"></i></button>
+            </form>
+            
+            <button onclick="window.location.href='admin.html'" class="w-full text-center text-xs text-slate-400 font-bold mt-6 hover:text-blue-500 transition">Access Admin Terminal</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Redirect if already logged in
+        if(localStorage.getItem('beatsvibe_session') && localStorage.getItem('beatsvibe_session') !== "null") {
+            window.location.replace("dashboard.html");
+        }
+        if(localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+    </script>
+</body>
+</html>
