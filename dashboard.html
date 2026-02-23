@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BeatsVibe | App</title>
+    <link rel="icon" type="image/png" href="logo1.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' }</script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
@@ -34,31 +35,22 @@
     <main class="px-6 pt-6">
         
         <div id="tab-home" class="app-section block animate-fade-in-up">
-            <h3 class="font-extrabold text-xl mb-4">Your Journey</h3>
+            <h3 class="font-black text-2xl mb-4">Your Journey</h3>
             <div id="myCoursesList" class="space-y-4"></div>
         </div>
 
         <div id="tab-explore" class="app-section hidden animate-fade-in-up">
-            <h3 class="font-extrabold text-xl mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Academy Hub</h3>
-            <div id="courseGrid" class="space-y-4 mb-10"></div>
-
-            <h3 class="font-extrabold text-xl mb-4">Meet Our Experts</h3>
+            <h3 class="font-black text-2xl mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Academy Hub</h3>
+            <div id="appCourseGrid" class="space-y-4 mb-10"></div> <h3 class="font-black text-xl mb-4">Meet Our Experts</h3>
             <div id="facultiesList" class="flex overflow-x-auto gap-4 pb-4 snap-x"></div>
-
-            <div class="mt-8 p-6 rounded-3xl bg-gradient-to-br from-blue-600 to-purple-600 text-white relative overflow-hidden shadow-xl shadow-blue-500/20">
-                <div class="absolute right-[-20px] bottom-[-20px] opacity-10"><i class="fas fa-quote-right text-9xl"></i></div>
-                <h4 class="font-black text-2xl mb-1">Suyash Rathod</h4>
-                <p class="text-blue-200 text-xs font-bold tracking-widest uppercase mb-4">Founder & CEO</p>
-                <p class="text-sm italic leading-relaxed">"We don't just teach code. We build the architecture of your future. Learn, build, and scale with BeatsVibe."</p>
-            </div>
         </div>
 
         <div id="tab-study" class="app-section hidden animate-fade-in-up">
-            <h3 class="font-extrabold text-xl mb-4">Study Material</h3>
+            <h3 class="font-black text-2xl mb-4">Study Material</h3>
             <div id="myNotesList" class="space-y-3 mb-8"></div>
             
-            <h3 class="font-extrabold text-xl mb-4">Achievements</h3>
-            <div id="myCertsList" class="space-y-3"></div>
+            <h3 class="font-black text-2xl mb-4">Achievements</h3>
+            <div id="myCertsList" class="space-y-4"></div>
         </div>
 
         <div id="tab-profile" class="app-section hidden animate-fade-in-up">
@@ -69,31 +61,27 @@
                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"><i class="fas fa-pen text-white"></i></div>
                 </div>
                 <input type="file" id="profilePicInput" accept="image/*" class="hidden" onchange="handleProfileUpload(event)">
-                <h3 id="profileName" class="font-extrabold text-lg mt-3">Student</h3>
+                <h3 id="profileName" class="font-black text-xl mt-3">Student</h3>
                 <p id="profileId" class="text-xs text-slate-400 font-mono">ID</p>
             </div>
 
             <form onsubmit="saveProfileSettings(event)" class="space-y-4 text-sm bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm">
-                <div><label class="text-[10px] font-bold text-slate-400 uppercase">Full Name</label><input type="text" id="set-name" class="w-full mt-1 p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl outline-none" required></div>
-                <div><label class="text-[10px] font-bold text-slate-400 uppercase">Phone</label><input type="text" id="set-phone" placeholder="+91" class="w-full mt-1 p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl outline-none"></div>
-                <div><label class="text-[10px] font-bold text-slate-400 uppercase">Education</label><select id="set-edu" class="w-full mt-1 p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl outline-none"><option value="School">School</option><option value="College">College</option><option value="Graduate">Graduate</option></select></div>
-                <div><label class="text-[10px] font-bold text-slate-400 uppercase">College/Company</label><input type="text" id="set-college" class="w-full mt-1 p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl outline-none"></div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-3.5 rounded-xl font-bold mt-2 shadow-lg shadow-blue-500/30">Save Profile</button>
+                <div><label class="text-[10px] font-bold text-slate-400 uppercase">Full Name</label><input type="text" id="set-name" class="w-full mt-1 p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl outline-none" required></div>
+                <div><label class="text-[10px] font-bold text-slate-400 uppercase">Phone</label><input type="text" id="set-phone" placeholder="+91" class="w-full mt-1 p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl outline-none"></div>
+                <div><label class="text-[10px] font-bold text-slate-400 uppercase">Education</label><select id="set-edu" class="w-full mt-1 p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl outline-none"><option value="School">School</option><option value="College">College</option><option value="Graduate">Graduate</option><option value="Professional">Professional</option></select></div>
+                <div><label class="text-[10px] font-bold text-slate-400 uppercase">College/Company</label><input type="text" id="set-college" class="w-full mt-1 p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl outline-none"></div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold mt-2 shadow-lg shadow-blue-500/30">Save Profile</button>
             </form>
             
-            <button onclick="logout()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-500 font-bold py-3.5 rounded-xl mt-6 border border-red-100 dark:border-red-800/50"><i class="fas fa-sign-out-alt mr-2"></i> Terminate Session</button>
+            <button onclick="logout()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-500 font-bold py-4 rounded-2xl mt-6 border border-red-100 dark:border-red-800/50"><i class="fas fa-sign-out-alt mr-2"></i> Terminate Session</button>
         </div>
-
     </main>
 
     <button onclick="toggleNeuroNova()" class="fixed bottom-24 right-6 w-14 h-14 bg-cyan-500 rounded-full flex items-center justify-center text-slate-900 text-2xl shadow-[0_0_20px_rgba(6,182,212,0.6)] z-40 transition-transform hover:scale-110"><i class="fas fa-brain"></i></button>
 
-    <div id="neuroNovaWidget" class="fixed inset-x-4 bottom-24 bg-slate-900/95 backdrop-blur-3xl border border-cyan-500/30 rounded-[32px] shadow-2xl z-50 transform translate-y-[150%] transition-transform duration-500 flex flex-col h-[60vh] hidden-safari">
+    <div id="neuroNovaWidget" class="fixed inset-x-4 bottom-24 bg-slate-900/95 backdrop-blur-3xl border border-cyan-500/30 rounded-[32px] shadow-2xl z-50 transform translate-y-[150%] transition-transform duration-500 flex flex-col h-[60vh]">
         <div class="p-4 border-b border-cyan-500/20 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center text-slate-900 text-sm"><i class="fas fa-brain"></i></div>
-                <div><h3 class="font-extrabold text-cyan-400 text-sm">NeuroNova</h3><p class="text-[10px] text-cyan-500/70">AI Mentor</p></div>
-            </div>
+            <div class="flex items-center gap-3"><div class="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center text-slate-900 text-sm"><i class="fas fa-brain"></i></div><div><h3 class="font-extrabold text-cyan-400 text-sm">NeuroNova</h3><p class="text-[10px] text-cyan-500/70">AI Mentor</p></div></div>
             <button onclick="toggleNeuroNova()" class="text-cyan-500 p-2"><i class="fas fa-times text-xl"></i></button>
         </div>
         <div class="flex-1 overflow-y-auto p-4 space-y-4 font-mono text-xs" id="nn-console">
@@ -108,27 +96,15 @@
     </div>
 
     <nav class="glass-panel fixed bottom-0 w-full px-6 py-4 flex justify-between items-center z-40 pb-safe">
-        <button onclick="switchAppTab('home')" id="nav-home" class="nav-btn nav-active flex flex-col items-center gap-1 text-slate-400">
-            <i class="fas fa-home text-xl"></i><span class="text-[10px] font-bold">Home</span>
-        </button>
-        <button onclick="switchAppTab('explore')" id="nav-explore" class="nav-btn flex flex-col items-center gap-1 text-slate-400">
-            <i class="fas fa-compass text-xl"></i><span class="text-[10px] font-bold">Explore</span>
-        </button>
-        <button onclick="switchAppTab('study')" id="nav-study" class="nav-btn flex flex-col items-center gap-1 text-slate-400">
-            <i class="fas fa-book-open text-xl"></i><span class="text-[10px] font-bold">Study</span>
-        </button>
-        <button onclick="switchAppTab('profile')" id="nav-profile" class="nav-btn flex flex-col items-center gap-1 text-slate-400">
-            <i class="fas fa-user text-xl"></i><span class="text-[10px] font-bold">Profile</span>
-        </button>
+        <button onclick="switchAppTab('home')" id="nav-home" class="nav-btn nav-active flex flex-col items-center gap-1 text-slate-400"><i class="fas fa-home text-xl"></i><span class="text-[10px] font-bold">Home</span></button>
+        <button onclick="switchAppTab('explore')" id="nav-explore" class="nav-btn flex flex-col items-center gap-1 text-slate-400"><i class="fas fa-compass text-xl"></i><span class="text-[10px] font-bold">Explore</span></button>
+        <button onclick="switchAppTab('study')" id="nav-study" class="nav-btn flex flex-col items-center gap-1 text-slate-400"><i class="fas fa-book-open text-xl"></i><span class="text-[10px] font-bold">Study</span></button>
+        <button onclick="switchAppTab('profile')" id="nav-profile" class="nav-btn flex flex-col items-center gap-1 text-slate-400"><i class="fas fa-user text-xl"></i><span class="text-[10px] font-bold">Profile</span></button>
     </nav>
 
     <script src="app.js"></script>
     <script>
-        // Force redirect if not logged in
-        if(!localStorage.getItem('beatsvibe_session') || localStorage.getItem('beatsvibe_session') === "null") {
-            window.location.replace("index.html");
-        }
-        if(localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); document.getElementById('themeIcon').classList.replace('fa-moon', 'fa-sun'); }
+        if(!localStorage.getItem('beatsvibe_session') || localStorage.getItem('beatsvibe_session') === "null") window.location.replace("index.html");
     </script>
 </body>
 </html>
