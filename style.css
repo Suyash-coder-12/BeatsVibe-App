@@ -1,0 +1,38 @@
+/* Hide scrollbar for seamless app feel */
+::-webkit-scrollbar { display: none; }
+body { -ms-overflow-style: none; scrollbar-width: none; overscroll-behavior-y: none; }
+
+/* Advanced App Animations */
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.4); }
+    50% { box-shadow: 0 0 30px rgba(6, 182, 212, 0.8); }
+}
+
+/* Glassmorphism */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.dark .glass-panel {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* App Bottom Nav Indicator */
+.nav-active { color: #3b82f6; transform: translateY(-4px); transition: all 0.3s ease; }
+.dark .nav-active { color: #06b6d4; }
