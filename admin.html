@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root Command | BeatsVibe Technologies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-900 font-['Plus_Jakarta_Sans'] dark:bg-slate-950 dark:text-white transition-colors duration-300 flex h-screen overflow-hidden">
+    
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[9999] flex flex-col gap-3"></div>
+
+    <aside class="w-20 lg:w-64 bg-slate-900 border-r border-slate-800 flex flex-col text-white transition-all z-20 shadow-2xl">
+        <div class="p-6 border-b border-slate-800 flex items-center gap-4 justify-center lg:justify-start">
+            <div class="w-10 h-10 bg-cyan-500 rounded-xl text-slate-900 flex items-center justify-center font-extrabold shadow-[0_0_15px_rgba(6,182,212,0.5)]"><i class="fas fa-bolt"></i></div>
+            <span class="font-extrabold tracking-widest uppercase text-sm text-cyan-400 hidden lg:block">SYS_ADMIN</span>
+        </div>
+        <nav class="flex-1 p-4 space-y-4 overflow-y-auto mt-4">
+            <button class="w-full text-left p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-bold text-sm flex items-center justify-center lg:justify-start gap-4 transition"><i class="fas fa-chart-pie text-xl"></i> <span class="hidden lg:block">Analytics Hub</span></button>
+        </nav>
+        <div class="p-4 border-t border-slate-800">
+            <button onclick="adminLogout()" class="w-full bg-red-500/10 text-red-500 py-3 rounded-xl font-bold text-sm hover:bg-red-500 hover:text-white transition flex justify-center items-center gap-3"><i class="fas fa-power-off"></i> <span class="hidden lg:block">Terminate</span></button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header class="bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 p-6 flex justify-between items-center sticky top-0 z-10">
+            <h1 class="text-3xl font-extrabold dark:text-white tracking-tight">Overview <span class="text-cyan-500">Node</span></h1>
+            <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-cyan-400 hover:scale-110 transition"><i id="themeIcon" class="fas fa-moon"></i></button>
+        </header>
+
+        <div class="p-6 md:p-8 space-y-8 max-w-7xl w-full mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+                    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-2"><i class="fas fa-users mr-2 text-blue-500"></i>Total Users</p>
+                    <h3 id="statTotalStudents" class="text-4xl font-extrabold dark:text-white font-mono">0</h3>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+                    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-2"><i class="fas fa-chart-line mr-2 text-green-500"></i>Active Subs</p>
+                    <h3 class="text-4xl font-extrabold dark:text-white font-mono" id="statActiveSubs">0</h3>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+                    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-2"><i class="fas fa-wallet mr-2 text-purple-500"></i>Gross Revenue</p>
+                    <h3 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 font-mono" id="statRevenue">₹0</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                <div class="xl:col-span-2 bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <h2 class="font-extrabold text-lg dark:text-white mb-6">Revenue Growth</h2>
+                    <div class="relative h-72 w-full"><canvas id="growthChart"></canvas></div>
+                </div>
+                <div class="xl:col-span-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm overflow-hidden flex flex-col h-[400px]">
+                    <div class="p-6 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+                        <h2 class="font-extrabold text-lg dark:text-white">Active Nodes (Users)</h2>
+                    </div>
+                    <div class="overflow-y-auto flex-1 p-2"><div id="adminStudentList" class="space-y-2"></div></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="neuroNovaWidget" class="fixed bottom-6 right-6 w-80 bg-slate-900/95 backdrop-blur-2xl border border-cyan-500/30 rounded-[32px] shadow-[0_0_30px_rgba(6,182,212,0.15)] overflow-hidden z-[100] transform transition-all duration-500 flex flex-col h-96">
+        <div class="bg-cyan-500/10 p-4 border-b border-cyan-500/20 flex justify-between items-center cursor-pointer" onclick="toggleNeuroNova()">
+            <div class="flex items-center gap-3">
+                <div class="relative"><div class="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center text-slate-900 text-sm animate-pulse"><i class="fas fa-brain"></i></div><div class="absolute top-0 right-0 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-slate-900"></div></div>
+                <div><h3 class="font-extrabold text-cyan-400 text-sm tracking-widest uppercase">NeuroNova AI</h3><p class="text-[10px] text-cyan-500/70 font-mono">v3.1 Core Active</p></div>
+            </div>
+            <i class="fas fa-chevron-down text-cyan-500/50 hover:text-cyan-400 transition" id="nn-toggle-icon"></i>
+        </div>
+        <div class="flex-1 overflow-y-auto p-4 space-y-4 font-mono text-sm" id="nn-console">
+            <div class="flex flex-col gap-1"><span class="text-slate-500 text-xs">System</span><p class="text-cyan-300 bg-cyan-500/10 p-3 rounded-tr-2xl rounded-bl-2xl rounded-br-2xl border border-cyan-500/20">Awaiting command, Founder.</p></div>
+        </div>
+        <div class="p-3 border-t border-cyan-500/20 bg-slate-950">
+            <form onsubmit="handleNeuroNova(event)" class="relative flex items-center">
+                <span class="absolute left-3 text-cyan-500 font-bold">></span>
+                <input type="text" id="nn-input" placeholder="Type a command..." class="w-full bg-transparent border-none text-cyan-400 placeholder-cyan-500/30 focus:ring-0 outline-none pl-8 pr-10 py-2 font-mono text-sm" autocomplete="off">
+                <button type="submit" class="absolute right-3 text-cyan-500 hover:text-white transition"><i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
