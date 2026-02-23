@@ -2,63 +2,78 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeatsVibe Technologies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BeatsVibe Technologies | Scaling Tech Careers</title>
+    <link rel="icon" type="image/png" href="logo1.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' }</script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-900 font-['Plus_Jakarta_Sans'] dark:bg-slate-900 dark:text-white transition-colors duration-300 relative">
+<body class="bg-slate-50 text-slate-900 font-['Plus_Jakarta_Sans'] dark:bg-slate-950 dark:text-white relative selection:bg-blue-500/30">
 
     <div id="toast-container" class="fixed top-6 right-6 z-[9999] flex flex-col gap-3 w-full px-6 max-w-sm"></div>
 
-    <nav class="fixed w-full z-50 glass-panel border-b-0 transition-colors">
+    <nav class="fixed w-full z-50 glass-panel border-b border-slate-200 dark:border-slate-800 transition-colors">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <div class="font-extrabold text-2xl tracking-tight flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
                 <div class="w-8 h-8 bg-blue-600 rounded-lg text-white flex items-center justify-center text-sm shadow-lg shadow-blue-500/50">B</div>
                 BeatsVibe
             </div>
             <div class="flex gap-4 items-center">
-                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-yellow-400 hover:scale-110 transition">
-                    <i id="themeIcon" class="fas fa-moon"></i>
-                </button>
-                <button id="navAuthBtn" onclick="toggleModal('authModal', true)" class="bg-slate-900 dark:bg-white dark:text-slate-900 text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-blue-600 dark:hover:bg-slate-200 transition shadow-lg">Access Portal</button>
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-yellow-400 hover:scale-110 transition"><i class="fas fa-moon"></i></button>
+                <button id="navAuthBtn" onclick="toggleModal('authModal', true)" class="bg-slate-900 dark:bg-white dark:text-slate-900 text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-blue-600 dark:hover:bg-slate-200 transition-all shadow-lg hover:shadow-blue-500/20">Access Portal</button>
             </div>
         </div>
     </nav>
 
-    <main class="pt-40 pb-20 px-6 text-center animate-fade-in-up">
+    <main class="pt-40 pb-20 px-6 text-center animate-slide-up relative overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
+        
         <span class="bg-blue-100/50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-6 inline-block border border-blue-200 dark:border-blue-800">ISO 9001:2015 Certified EdTech</span>
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 dark:text-white leading-tight">Engineer Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600">Future.</span></h1>
+        <h1 class="text-5xl md:text-7xl font-black mb-6 text-slate-900 dark:text-white leading-tight">Engineer Your <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600">Future.</span></h1>
         <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">Premium Tech Education, Real-World Architecture, and AI-Powered Mentorship.</p>
-        <button onclick="document.getElementById('courses').scrollIntoView()" class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">Explore Academy</button>
+        <button onclick="document.getElementById('courses').scrollIntoView()" class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30 text-lg">Explore Academy <i class="fas fa-arrow-down ml-2"></i></button>
     </main>
 
-    <section class="max-w-6xl mx-auto px-6 py-24">
-        <div class="glass-panel p-8 md:p-12 rounded-[40px] shadow-2xl flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
-            <div class="w-64 h-64 rounded-3xl overflow-hidden shadow-xl shrink-0 border-4 border-white dark:border-slate-800 relative z-10">
-                <img src="founder.jpg" alt="Suyash Rathod" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300x300?text=Founder'">
+    <section id="courses" class="max-w-7xl mx-auto px-6 pb-24 pt-12 relative z-10">
+        <h2 class="text-3xl md:text-4xl font-black text-center mb-12 dark:text-white">The <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Terminal</span></h2>
+        <div id="indexCourseGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
             </div>
-            <div class="relative z-10 text-center md:text-left">
-                <span class="text-cyan-600 dark:text-cyan-400 font-extrabold tracking-widest uppercase text-xs mb-2 block">Meet The Visionary</span>
-                <h2 class="text-4xl font-black dark:text-white mb-2">Suyash Rathod</h2>
-                <p class="text-slate-500 dark:text-slate-400 font-bold mb-6 text-lg">Founder & CEO, BeatsVibe Technologies</p>
-                <div class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed">
-                    <p>Suyash started BeatsVibe with a singular mission: to bridge the massive gap between traditional academic degrees and cutting-edge industry demands.</p>
-                    <p>As a tech-enthusiast and an innovator at heart, he built BeatsVibe not just as an EdTech platform, but as a technological ecosystem. His philosophy is simple—<strong class="text-blue-600 dark:text-blue-400">"Don't just write code, architect scalable solutions."</strong></p>
-                    <p>Under his leadership, BeatsVibe is shaping the next generation of full-stack developers, AI engineers, and cybersecurity experts.</p>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 pb-32">
+        <div class="glass-panel p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden">
+            <div class="absolute right-[-5%] top-[-5%] opacity-5 text-blue-500"><i class="fas fa-quote-right text-[200px]"></i></div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-10 relative z-10">
+                <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-[0_0_40px_rgba(59,130,246,0.3)] border-4 border-white dark:border-slate-800 shrink-0">
+                    <img src="https://via.placeholder.com/400" alt="Suyash Rathod" class="w-full h-full object-cover">
+                </div>
+                
+                <div>
+                    <span class="text-blue-600 dark:text-cyan-400 font-bold tracking-widest uppercase text-xs">Meet The Visionary</span>
+                    <h2 class="text-4xl md:text-5xl font-black mt-2 mb-2 dark:text-white">Suyash Rathod</h2>
+                    <p class="text-slate-500 dark:text-slate-400 font-bold mb-6 text-lg">Founder & CEO, BeatsVibe Technologies</p>
+                    
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                        "I started BeatsVibe with a singular, unshakeable belief: The traditional education system is broken. We are taught to memorize, not to engineer. We are handed degrees, but denied real-world skills.
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6 font-semibold">
+                        At BeatsVibe Technologies, we don't just teach code. We build the architecture of your future. We are cultivating a breed of developers who think like founders, write code like hackers, and solve problems like industry leaders."
+                    </p>
+                    
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center text-blue-600 hover:scale-110 transition shadow-sm"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center text-slate-800 dark:text-white hover:scale-110 transition shadow-sm"><i class="fab fa-github"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center text-pink-600 hover:scale-110 transition shadow-sm"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section id="courses" class="max-w-7xl mx-auto px-6 pb-24">
-        <h2 class="text-4xl font-extrabold text-center mb-12 dark:text-white">The <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Terminal</span></h2>
-        <div id="courseGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-            </div>
     </section>
 
     <div id="authModal" class="modal-overlay hidden">
@@ -72,24 +87,38 @@
 
             <div id="auth-student" class="block">
                 <div class="flex bg-slate-100 dark:bg-slate-900 p-1 rounded-xl mb-6">
-                    <button onclick="toggleLoginType('signin')" id="toggle-signin" class="flex-1 py-3 rounded-xl bg-white dark:bg-slate-800 shadow-md font-bold text-sm transition-all text-blue-600 dark:text-blue-400">Sign In</button>
-                    <button onclick="toggleLoginType('signup')" id="toggle-signup" class="flex-1 py-3 rounded-xl text-slate-500 font-bold text-sm transition-all">Sign Up</button>
+                    <button onclick="toggleLoginType('signin')" id="toggle-signin" class="flex-1 py-2 rounded-lg bg-white dark:bg-slate-700 shadow-sm font-bold text-sm transition-all text-blue-600 dark:text-blue-400">Sign In</button>
+                    <button onclick="toggleLoginType('signup')" id="toggle-signup" class="flex-1 py-2 rounded-lg text-slate-500 font-bold text-sm transition-all">Sign Up</button>
                 </div>
                 
                 <form onsubmit="handleStudentAuth(event)" class="space-y-4 text-left">
                     <div id="signupNameField" class="hidden">
                         <input type="text" id="authName" placeholder="Full Name" class="w-full p-4 bg-slate-50 dark:bg-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:border-blue-600 transition-all font-medium">
                     </div>
-                    <input type="text" id="authId" placeholder="Email or Student ID" class="w-full p-4 bg-slate-50 dark:bg-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:border-blue-600 transition-all font-medium" required>
-                    <input type="password" id="authPass" placeholder="Password" class="w-full p-4 bg-slate-50 dark:bg-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:border-blue-600 transition-all font-medium" required>
-                    <button type="submit" id="authSubmitBtn" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all mt-4 shadow-lg shadow-blue-500/30">Continue <i class="fas fa-arrow-right ml-2"></i></button>
+                    <div>
+                        <input type="text" id="authId" placeholder="Email / Student ID" class="w-full p-4 bg-slate-50 dark:bg-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:border-blue-600 transition-all font-medium" required>
+                    </div>
+                    <div>
+                        <input type="password" id="authPass" placeholder="Password" class="w-full p-4 bg-slate-50 dark:bg-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:border-blue-600 transition-all font-medium" required>
+                    </div>
+                    <button type="submit" id="authSubmitBtn" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all mt-2 shadow-lg shadow-blue-500/30">Sign In <i class="fas fa-arrow-right ml-2"></i></button>
                 </form>
             </div>
 
             <div id="auth-admin" class="hidden">
                 <div class="text-center mb-6">
                     <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 border border-red-200 dark:border-red-800"><i class="fas fa-terminal"></i></div>
-                    <h3 class="font-bold dark:text-white">Admin Control Room</h3>
+                    <h3 class="font-bold dark:text-white">Root Access</h3>
                 </div>
                 <form onsubmit="handleAdminLogin(event)" class="space-y-4 text-left">
-                    <input type="text" id="adminId" placeholder="Admin Username" class="w-full p-4 bg
+                    <input type="text" id="adminId" placeholder="Admin ID" class="w-full p-4 bg-slate-50 dark:bg-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:border-red-600 transition-all font-medium" required>
+                    <input type="password" id="adminPass" placeholder="Master Password" class="w-full p-4 bg-slate-50 dark:bg-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:border-red-600 transition-all font-medium" required>
+                    <button type="submit" class="w-full bg-slate-900 dark:bg-red-600 text-white py-4 rounded-2xl font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-500/30">Access Terminal <i class="fas fa-unlock ml-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
