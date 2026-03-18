@@ -187,7 +187,7 @@ async function buyCourse(courseId) {
             },
             prefill: { name: user.name }, theme: { color: "#3b82f6" }
         }).open();
-    } catch (error) { showToast("Backend is offline. Run 'node server.js'", "error"); }
+    } catch (error) { showToast("Backend is offline. Because We are Modifying Some Features", "error"); }
 }
 
 // ==========================================
