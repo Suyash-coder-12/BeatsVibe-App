@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | BeatsVibe Technologies</title>
+    <link rel="icon" type="image/png" href="logo1.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #0f172a; }
+        .glass-corporate { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid #e2e8f0; }
+        .card-corporate {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+        .card-corporate:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #cbd5e1;
+        }
+        .text-gradient { background: linear-gradient(135deg, #2563eb 0%, #0891b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="relative selection:bg-blue-200 overflow-x-hidden">
+
+    <!-- CORPORATE NAVBAR -->
+    <nav class="fixed w-full z-50 glass-corporate transition-colors">
+        <div class="max-w-7xl mx-auto h-20 flex justify-between items-center px-6">
+            <div class="font-bold text-xl tracking-tight flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                
+                BeatsVibe <span class="hidden md:inline text-slate-500 font-medium text-sm border-l border-slate-300 pl-3 ml-1">Technologies</span>
+            </div>
+            
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex gap-8 items-center text-sm font-semibold text-slate-600">
+                <a href="index.html" class="text-blue-600 font-bold transition">Home</a>
+                <a href="index.html#certifications" class="hover:text-blue-600 transition">Programs</a>
+                <a href="enterprise.html" class="hover:text-blue-600 transition">Enterprise</a>
+                
+                <div class="relative group cursor-pointer py-4">
+                    <span class="hover:text-blue-600 transition flex items-center gap-1">Company <i class="fas fa-chevron-down text-xs"></i></span>
+                    <div class="absolute top-full right-0 bg-white border border-slate-200 shadow-xl rounded-xl w-48 py-2 hidden group-hover:block transition-all">
+                        <a href="about.html" class="block px-4 py-2 hover:bg-slate-50 text-slate-700">About Us</a>
+                        <a href="founder.html" class="block px-4 py-2 hover:bg-slate-50 text-slate-700">Founder</a>
+                        <a href="guidelines.html" class="block px-4 py-2 hover:bg-slate-50 text-slate-700">Guidelines</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-4 items-center">
+                <button onclick="window.location.href='index.html'" class="bg-slate-100 text-slate-700 px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-slate-200 transition-all shadow-sm hidden md:block">Back to Platform</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER & HERO -->
+    <div class="pt-40 pb-20 bg-slate-50 border-b border-slate-200 text-center px-6 relative overflow-hidden">
+        <div class="absolute top-[-20%] left-[-10%] w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-[-20%] right-[-10%] w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+        
+        <span class="text-blue-600 font-bold text-sm tracking-widest uppercase relative z-10">Global Support & Partnerships</span>
+        <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight mt-4 mb-6 relative z-10">Let's Build <span class="text-gradient">Together.</span></h1>
+        <p class="text-slate-500 max-w-2xl mx-auto font-medium text-lg mb-10 relative z-10">Whether you are a student looking to scale your career, or an enterprise aiming to upskill your engineering teams, our board is ready to connect.</p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+            <button onclick="document.getElementById('contact-form').scrollIntoView()" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg text-sm tracking-wide">
+                Get in Touch
+            </button>
+            <button onclick="document.getElementById('know-more').scrollIntoView()" class="bg-white text-slate-700 border border-slate-300 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition text-sm tracking-wide shadow-sm flex items-center justify-center gap-2">
+                Know More <i class="fas fa-arrow-down"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 🌟 NEW: IMPRESSION BUILDER SECTION (KNOW MORE) 🌟 -->
+    <section id="know-more" class="max-w-7xl mx-auto px-6 py-24">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Why Partner With BeatsVibe?</h2>
+            <p class="text-slate-500 font-medium max-w-2xl mx-auto">We bridge the gap between theoretical academics and high-performance industry execution.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- For Students -->
+            <div class="card-corporate p-8 text-center border-t-4 border-t-blue-500">
+                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fas fa-user-graduate"></i></div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">For Students</h3>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">Gain access to NeuroNova AI, verifiable blockchain certificates, and 100% guaranteed live project internships that guarantee real-world portfolio building.</p>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Career Defining</span>
+            </div>
+            
+            <!-- For Companies -->
+            <div class="card-corporate p-8 text-center border-t-4 border-t-slate-800">
+                <div class="w-16 h-16 bg-slate-100 text-slate-800 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fas fa-building"></i></div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">For Enterprises</h3>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">Upskill your current workforce with custom Web3, AI, and DevOps bootcamps, or hire directly from our pool of rigorously vetted, deployment-ready engineers.</p>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">B2B Upskilling</span>
+            </div>
+            
+            <!-- For Institutions -->
+            <div class="card-corporate p-8 text-center border-t-4 border-t-cyan-500">
+                <div class="w-16 h-16 bg-cyan-50 text-cyan-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fas fa-university"></i></div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">For Campuses</h3>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">Establish a BeatsVibe Vanguard chapter at your university. We sponsor hackathons, provide tech grants, and offer exclusive PPO tracks to top talent.</p>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Campus Vanguard</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTACT SECTION -->
+    <main id="contact-form" class="w-full bg-slate-50 border-t border-slate-200 py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Contact Information Cards (Left Col - 5 columns wide) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Connect Directly</h2>
+                        <p class="text-slate-500 mb-8 font-medium">Reach out to the specific department you need for a faster resolution.</p>
+                    </div>
+
+                    <div class="card-corporate p-6 flex items-start gap-5 hover:border-blue-300">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase mb-1">24/7 Support & WhatsApp</p>
+                            <a href="tel:9022016196" class="text-lg font-bold text-slate-900 hover:text-blue-600 transition font-mono">+91 90220 16196</a>
+                        </div>
+                    </div>
+
+                    <div class="card-corporate p-6 flex items-start gap-5 hover:border-blue-300">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fas fa-envelope"></i></div>
+                        <div class="w-full">
+                            <p class="text-xs font-bold text-slate-400 uppercase mb-1">Email Directories</p>
+                            <div class="space-y-2 mt-2">
+                                <a href="mailto:support@beatsvibe.com" class="block text-sm font-bold text-slate-700 hover:text-blue-600 transition">support@beatsvibe.com <span class="text-xs font-normal text-slate-400 ml-1">(Students)</span></a>
+                                <a href="mailto:enterprise@beatsvibe.com" class="block text-sm font-bold text-slate-700 hover:text-blue-600 transition">enterprise@beatsvibe.com <span class="text-xs font-normal text-slate-400 ml-1">(B2B)</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-corporate p-6 flex items-start gap-5 hover:border-blue-300">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase mb-1">Corporate Headquarters</p>
+                            <p class="text-sm font-bold text-slate-700">Nagpur, Maharashtra, India</p>
+                            <p class="text-xs text-slate-500 mt-1">Operating globally via Cloud Infrastructure.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form (Right Col - 7 columns wide) -->
+                <div class="lg:col-span-7">
+                    <div class="card-corporate p-8 md:p-10 bg-white">
+                        <div class="flex items-center gap-3 mb-8 pb-6 border-b border-slate-100">
+                            <div class="w-10 h-10 bg-slate-900 text-white rounded-lg flex items-center justify-center"><i class="fas fa-paper-plane"></i></div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-slate-900">Send an Inquiry</h3>
+                                <p class="text-xs text-slate-500 font-medium">Securely routed to BeatsVibe Administration.</p>
+                            </div>
+                        </div>
+                        
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Full Name / Company</label>
+                                    <input type="text" id="contactName" placeholder="E.g. Suyash Rathod" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-600 focus:bg-white transition text-sm font-medium" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Email Address</label>
+                                    <input type="email" id="contactEmail" placeholder="name@domain.com" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-600 focus:bg-white transition text-sm font-medium" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Nature of Inquiry</label>
+                                <select id="contactSubject" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-600 focus:bg-white transition text-sm font-medium text-slate-700" required>
+                                    <option value="" disabled selected>Select an option...</option>
+                                    <option value="student_course">Student: Course / Internship Enrollment</option>
+                                    <option value="student_support">Student: Technical Support / NeuroNova Issue</option>
+                                    <option value="enterprise_training">Enterprise: Corporate Workforce Training</option>
+                                    <option value="enterprise_hiring">Enterprise: Hire BeatsVibe Graduates</option>
+                                    <option value="campus_collab">Institution: Campus Ambassador & Hackathons</option>
+                                    <option value="other">Other Business Inquiry</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Message Details</label>
+                                <textarea id="contactMsg" rows="5" placeholder="Please provide specific details so we can route your query to the correct architect..." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-600 focus:bg-white transition text-sm font-medium" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5 transition-all text-sm tracking-wide">
+                                Submit Request
+                            </button>
+                            <p class="text-center text-[10px] text-slate-400 mt-4"><i class="fas fa-lock mr-1"></i> End-to-end encrypted protocol.</p>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-center text-sm">
+        <p>&copy; 2026 BeatsVibe Technologies. All rights reserved. Registered at Nagpur, MH.</p>
+    </footer>
+
+    <script>
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const type = document.getElementById('contactSubject').value;
+            let responseMsg = "Thank you! Your message has been routed to BeatsVibe administration.";
+            
+            // Customized alert based on selection to show advanced functionality
+            if(type.includes('enterprise')) {
+                responseMsg = "Thank you! Our B2B Executive Board will review your corporate inquiry and contact you shortly.";
+            } else if (type.includes('student')) {
+                responseMsg = "Thanks for reaching out! Our student support team will assist you within 24 hours.";
+            }
+
+            alert(responseMsg);
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>

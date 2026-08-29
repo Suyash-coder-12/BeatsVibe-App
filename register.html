@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | BeatsVibe Technologies</title>
+    <link rel="icon" type="image/png" href="logo1.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .glass-corporate { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+    
+    <div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-purple-200 rounded-full blur-3xl opacity-40 z-0"></div>
+
+    <div class="w-full max-w-md glass-corporate p-10 rounded-[32px] shadow-2xl relative z-10">
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-extrabold text-slate-900">Initialize Node</h2>
+            <p class="text-sm text-slate-500 mt-2 font-medium">Register for a BeatsVibe Student Account.</p>
+        </div>
+
+        <form id="registerForm" class="space-y-4">
+            <div>
+                <input type="text" id="regName" placeholder="Full Legal Name" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-600 transition text-sm font-medium" required>
+            </div>
+            <div>
+                <input type="email" id="regEmail" placeholder="Email Address" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-600 transition text-sm font-medium" required>
+            </div>
+            <div>
+                <input type="password" id="regPass" placeholder="Create Strong Password" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-600 transition text-sm font-medium" required>
+            </div>
+            <button type="submit" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition shadow-lg text-sm tracking-wide mt-2">Request Account Setup</button>
+        </form>
+
+        <div class="mt-6 text-center">
+            <p class="text-sm text-slate-500 font-medium">Already have an ID? <a href="login.html" class="text-blue-600 font-bold hover:underline">Login Here</a></p>
+        </div>
+    </div>
+
+    <!-- Add Firebase & App Logic Here -->
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

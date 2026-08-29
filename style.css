@@ -1,0 +1,42 @@
+/* Hide scrollbar for seamless app feel */
+::-webkit-scrollbar { display: none; }
+body { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Advanced App Animations */
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+/* Glassmorphism Panels */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.dark .glass-panel {
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* App Bottom Nav Indicator */
+.nav-active { color: #3b82f6; transform: translateY(-4px); transition: all 0.3s ease; }
+.dark .nav-active { color: #06b6d4; }

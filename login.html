@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login | BeatsVibe</title>
+    <link rel="icon" type="image/png" href="logo1.png">
+    
+    <!-- Tailwind & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; }
+        .input-premium { 
+            width: 100%; padding: 14px; background: #1e293b; border: 1px solid #334155; 
+            color: white; border-radius: 12px; outline: none; margin-bottom: 16px; transition: all 0.3s;
+        }
+        .input-premium:focus { border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen relative overflow-hidden">
+
+    <!-- Background Design -->
+    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-40"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20"></div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-6 right-6 z-50 flex flex-col gap-3 w-full max-w-sm"></div>
+
+    <!-- Main Login Card -->
+    <div class="relative bg-[#1e293b]/70 p-8 md:p-10 rounded-3xl border border-slate-700 w-full max-w-md backdrop-blur-xl shadow-2xl mx-4">
+        
+        <!-- Logo & Title -->
+        <div class="text-center mb-8 cursor-pointer" onclick="window.location.href='/'">
+            <div class="w-14 h-14 bg-gradient-to-tr from-blue-600 to-cyan-500 text-white rounded-2xl mx-auto flex items-center justify-center text-3xl font-black mb-4 shadow-lg shadow-blue-500/30">B</div>
+            <h2 class="text-2xl font-extrabold text-white tracking-wide">BeatsVibe Portal</h2>
+            <p class="text-slate-400 text-sm mt-1">Access your secure enterprise lab.</p>
+        </div>
+
+        <!-- 🌟 TABS (Student vs Admin) 🌟 -->
+        <div class="flex bg-slate-800 rounded-xl p-1 mb-8">
+            <button id="tab-student-btn" onclick="customTabSwitch('student')" class="flex-1 py-2.5 rounded-lg bg-blue-600 text-white font-bold text-sm shadow-md transition-all">Student</button>
+            <button id="tab-admin-btn" onclick="customTabSwitch('admin')" class="flex-1 py-2.5 rounded-lg text-slate-400 font-bold text-sm hover:text-white transition-all">Admin Access</button>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- 🧑‍🎓 STUDENT SECTION (Visible by default) -->
+        <!-- ========================================= -->
+        <div id="auth-student" class="block">
+            
+            <!-- Sign In / Sign Up Sub-Tabs -->
+            <div class="flex gap-2 mb-6">
+                <button id="toggle-signin" onclick="toggleLoginType('signin')" class="flex-1 py-2 rounded-lg bg-slate-700 text-white font-bold text-xs transition border border-slate-600">Log In</button>
+                <button id="toggle-signup" onclick="toggleLoginType('signup')" class="flex-1 py-2 rounded-lg bg-transparent text-slate-400 font-bold text-xs hover:bg-slate-800 transition border border-transparent">Create Account</button>
+            </div>
+
+            <form onsubmit="handleStudentAuth(event)">
+                <!-- Hidden by default, shown when 'Create Account' is clicked -->
+                <div id="signupNameField" class="hidden animate-fade-in">
+                    <input type="text" id="authName" class="input-premium" placeholder="Full Legal Name">
+                </div>
+                
+                <input type="email" id="authId" class="input-premium" placeholder="Email Address" required>
+                <input type="password" id="authPass" class="input-premium" placeholder="Password" required>
+                
+                <button type="submit" id="authSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-blue-600/30 mt-2">Login to Dashboard <i class="fas fa-arrow-right ml-2 text-xs"></i></button>
+            </form>
+
+            <div class="mt-6 flex items-center justify-between">
+                <span class="w-1/5 border-b border-slate-700"></span>
+                <span class="text-xs text-slate-500 font-bold uppercase tracking-widest">OR</span>
+                <span class="w-1/5 border-b border-slate-700"></span>
+            </div>
+
+            <!-- Google Login -->
+            <button onclick="signInWithGoogle()" class="mt-6 w-full bg-white hover:bg-slate-100 text-slate-900 font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-3 shadow-md">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5"> Continue with Google
+            </button>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- 🛡️ ADMIN SECTION (HIDDEN BY DEFAULT) 🛡️ -->
+        <!-- ========================================= -->
+        <div id="auth-admin" class="hidden">
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-3 border border-red-500/20">
+                    <i class="fas fa-shield-alt text-2xl text-red-500"></i>
+                </div>
+                <p class="text-slate-300 text-sm font-medium">Restricted System Control Area</p>
+            </div>
+            
+            <form onsubmit="handleAdminLogin(event)">
+                <input type="text" id="adminId" class="input-premium" placeholder="Admin ID (Suyash)" required>
+                <input type="password" id="adminPass" class="input-premium" placeholder="Root Password" required>
+                
+                <button type="submit" class="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-red-600/30 mt-2">Initialize Terminal <i class="fas fa-terminal ml-2 text-xs"></i></button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Link to your app.js -->
+    <script src="app.js"></script>
+
+    <!-- UI Tab Logic for Login Page -->
+    <script>
+        function customTabSwitch(tab) {
+            const isStudent = tab === 'student';
+            
+            // Toggle Forms
+            document.getElementById('auth-student').classList.toggle('hidden', !isStudent);
+            document.getElementById('auth-student').classList.toggle('block', isStudent);
+            
+            document.getElementById('auth-admin').classList.toggle('hidden', isStudent);
+            document.getElementById('auth-admin').classList.toggle('block', !isStudent);
+
+            // Toggle Button Styling
+            const stdBtn = document.getElementById('tab-student-btn');
+            const admBtn = document.getElementById('tab-admin-btn');
+            
+            if(isStudent) {
+                stdBtn.className = "flex-1 py-2.5 rounded-lg bg-blue-600 text-white font-bold text-sm shadow-md transition-all";
+                admBtn.className = "flex-1 py-2.5 rounded-lg text-slate-400 font-bold text-sm hover:text-white transition-all bg-transparent";
+            } else {
+                admBtn.className = "flex-1 py-2.5 rounded-lg bg-blue-600 text-white font-bold text-sm shadow-md transition-all";
+                stdBtn.className = "flex-1 py-2.5 rounded-lg text-slate-400 font-bold text-sm hover:text-white transition-all bg-transparent";
+            }
+        }
+
+        // Toggle Login vs Signup visually
+        function toggleLoginType(mode) {
+            const isSignIn = mode === 'signin';
+            document.getElementById('signupNameField').classList.toggle('hidden', isSignIn);
+            document.getElementById('authName').required = !isSignIn;
+            
+            document.getElementById('authSubmitBtn').innerHTML = isSignIn ? 'Login to Dashboard <i class="fas fa-arrow-right ml-2 text-xs"></i>' : 'Create Free Account <i class="fas fa-user-plus ml-2 text-xs"></i>';
+            
+            const btnIn = document.getElementById('toggle-signin');
+            const btnUp = document.getElementById('toggle-signup');
+            
+            if(isSignIn) {
+                btnIn.className = "flex-1 py-2 rounded-lg bg-slate-700 text-white font-bold text-xs transition border border-slate-600";
+                btnUp.className = "flex-1 py-2 rounded-lg bg-transparent text-slate-400 font-bold text-xs hover:bg-slate-800 transition border border-transparent";
+            } else {
+                btnUp.className = "flex-1 py-2 rounded-lg bg-slate-700 text-white font-bold text-xs transition border border-slate-600";
+                btnIn.className = "flex-1 py-2 rounded-lg bg-transparent text-slate-400 font-bold text-xs hover:bg-slate-800 transition border border-transparent";
+            }
+
+            // Sync with app.js variable
+            if(typeof currentAuthMode !== 'undefined') currentAuthMode = mode;
+        }
+    </script>
+</body>
+</html>

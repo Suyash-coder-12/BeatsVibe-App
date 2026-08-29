@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Portal | BeatsVibe</title>
+    <link rel="icon" type="image/png" href="logo1.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        
+        .card-corporate { 
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 10px 15px -3px rgba(0,0,0,0.03); 
+            transition: all 0.3s ease;
+        }
+        .card-corporate:hover { box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05); border-color: #cbd5e1; }
+        
+        .input-premium {
+            width: 100%; padding: 0.875rem 1rem; background-color: #f8fafc; border: 1px solid #e2e8f0; 
+            border-radius: 12px; font-size: 0.875rem; font-weight: 500; color: #1e293b; outline: none; transition: all 0.2s ease;
+        }
+        .input-premium:focus { background-color: #ffffff; border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); }
+        
+        .animate-fade-in { animation: fadeIn 0.5s forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .no-select { user-select: none; -webkit-user-select: none; }
+        #security-overlay { 
+            position: fixed; inset: 0; background: rgba(15, 23, 42, 0.98); z-index: 999999; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            color: white; opacity: 0; visibility: hidden; transition: all 0.3s ease; backdrop-filter: blur(12px); text-align: center; padding: 20px;
+        }
+        #security-overlay.active { opacity: 1; visibility: visible; }
+
+        #lab-overlay { 
+            position: fixed; inset: 0; background: #0f172a; z-index: 999999; 
+            display: none; flex-direction: column; justify-content: center; align-items: center; 
+            color: #10b981; font-family: monospace; 
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-slate-50 relative no-select" oncontextmenu="return false;">
+
+    <div id="security-overlay">
+        <i class="fas fa-user-shield text-6xl md:text-7xl text-blue-500 mb-6 drop-shadow-lg"></i>
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight">Session Paused</h2>
+        <p class="text-slate-400 font-medium text-base md:text-lg">Screen recording or background activity detected.</p>
+        <p class="text-slate-500 mt-2 text-xs md:text-sm">Please return to the window to resume your secure session.</p>
+    </div>
+
+    <div id="lab-overlay">
+        <i class="fas fa-server text-6xl mb-6 animate-pulse text-blue-500"></i>
+        <h2 class="text-3xl font-bold text-white mb-2 tracking-widest">BEATSVIBE SECURE LAB</h2>
+        <p id="lab-logs" class="text-green-400 mt-4 text-sm w-96 break-words text-center">Initializing secure node container...</p>
+        <div class="w-64 bg-slate-800 h-2 rounded-full mt-6 overflow-hidden">
+            <div id="lab-progress" class="bg-blue-500 h-full w-0 transition-all duration-100"></div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed top-6 right-6 z-[9999] flex flex-col gap-3 w-[90%] md:w-full max-w-sm mx-auto md:mx-0"></div>
+
+    <div id="mobile-overlay" onclick="closeSidebar()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-30 hidden opacity-0 transition-opacity duration-300 md:hidden"></div>
+
+    <aside id="main-sidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-[#0f172a] text-white flex flex-col transform -translate-x-full transition-transform duration-300 md:relative md:translate-x-0 border-r border-slate-800 shadow-2xl">
+        <div class="h-20 flex items-center justify-between px-6 border-b border-slate-800/60 bg-[#0b1120]">
+            <div class="flex items-center">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-black mr-3 shadow-[0_0_15px_rgba(37,99,235,0.5)]">B</div>
+                <span class="font-bold tracking-widest text-sm uppercase text-slate-200">Enterprise</span>
+            </div>
+            <button onclick="closeSidebar()" class="md:hidden text-slate-400 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-3 mb-3 mt-2">Main Menu</p>
+            <button onclick="switchTabMobile('dashboard')" id="nav-dashboard" class="sidebar-btn w-full text-left px-4 py-3 rounded-xl bg-blue-600/20 text-blue-400 font-bold text-sm transition"><i class="fas fa-user-cog mr-3 w-4 text-center"></i> Identity Settings</button>
+            <button onclick="switchTabMobile('mycourses')" id="nav-mycourses" class="sidebar-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-400 hover:text-slate-200 font-bold text-sm transition"><i class="fas fa-laptop-code mr-3 w-4 text-center"></i> Enrolled Programs</button>
+            <button onclick="switchTabMobile('explore')" id="nav-explore" class="sidebar-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-400 hover:text-slate-200 font-bold text-sm transition"><i class="fas fa-compass mr-3 w-4 text-center"></i> Explore Courses</button>
+            
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-3 mb-3 mt-8">Virtual Classroom</p>
+            <button onclick="switchTabMobile('live')" id="nav-live" class="sidebar-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-400 hover:text-slate-200 font-bold text-sm transition flex items-center justify-between">
+                <div><i class="fas fa-broadcast-tower mr-3 w-4 text-center"></i> Live Sessions</div>
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
+            </button>
+            <button onclick="switchTabMobile('recordings')" id="nav-recordings" class="sidebar-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-400 hover:text-slate-200 font-bold text-sm transition"><i class="fas fa-video mr-3 w-4 text-center"></i> Lecture Archive</button>
+            <button onclick="switchTabMobile('notes')" id="nav-notes" class="sidebar-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-400 hover:text-slate-200 font-bold text-sm transition"><i class="fas fa-file-pdf mr-3 w-4 text-center"></i> Study Material</button>
+            
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-3 mb-3 mt-8">Credentials</p>
+            <button onclick="switchTabMobile('certificates')" id="nav-certificates" class="sidebar-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-400 hover:text-slate-200 font-bold text-sm transition"><i class="fas fa-award mr-3 w-4 text-center"></i> Certificates</button>
+        </nav>
+        
+        <div class="p-4 border-t border-slate-800/60 bg-[#0b1120]">
+            <button onclick="logout()" class="w-full text-left px-4 py-3 text-red-400 hover:bg-red-500/10 rounded-xl font-bold text-sm transition border border-transparent hover:border-red-500/20"><i class="fas fa-power-off mr-3 w-4 text-center"></i> Disconnect Session</button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto bg-slate-50">
+        
+        <header class="h-20 bg-white/80 backdrop-blur-md border-b border-slate-200 px-5 md:px-10 flex justify-between items-center sticky top-0 z-10">
+            <div class="flex items-center gap-3">
+                <button onclick="openSidebar()" class="md:hidden w-10 h-10 bg-slate-100 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-200 transition text-lg shadow-sm border border-slate-200"><i class="fas fa-bars"></i></button>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight">Hi, <span id="dashName" class="text-blue-600">Student</span></h1>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="signInWithGoogle()" class="hidden md:flex bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-50 shadow-sm items-center gap-2 transition">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-4 h-4" alt="Google"> Sync Profile
+                </button>
+                <button class="w-9 h-9 md:w-10 md:h-10 bg-slate-100 text-slate-500 rounded-full hover:bg-slate-200 transition"><i class="fas fa-bell text-sm md:text-base"></i></button>
+                <div class="w-10 h-10 bg-gradient-to-tr from-blue-600 to-cyan-500 text-white rounded-full flex items-center justify-center font-bold shadow-md border-2 border-white overflow-hidden" id="avatarContainer">
+                    <span id="avatarInitial">S</span>
+                    <img id="avatarImg" class="hidden w-full h-full object-cover" src="" alt="Profile">
+                </div>
+            </div>
+        </header>
+
+        <div class="p-5 md:p-10 max-w-6xl mx-auto w-full">
+            
+            <div id="tab-dashboard" class="app-section block animate-fade-in space-y-6 md:space-y-8">
+                <div class="card-corporate p-6 md:p-10">
+                    <div class="flex items-center gap-3 mb-6 md:mb-8 border-b border-slate-100 pb-5">
+                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-user-cog"></i></div>
+                        <h2 class="text-lg md:text-xl font-bold text-slate-900">Master Identity Configuration</h2>
+                    </div>
+                    
+                    <form id="profileForm" class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
+                        
+                        <div class="md:col-span-2 flex items-center gap-5 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                            <div class="relative w-24 h-24 rounded-full overflow-hidden bg-white border-4 border-white shadow-md flex items-center justify-center shrink-0 group cursor-pointer hover:border-blue-200 transition-all" onclick="document.getElementById('profilePhotoFile').click()">
+                                <img id="formAvatarPreview" src="https://via.placeholder.com/150" class="w-full h-full object-cover transition-opacity group-hover:opacity-40">
+                                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i class="fas fa-camera text-slate-800 text-2xl"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Upload Profile Photo</label>
+                                <input type="file" id="profilePhotoFile" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100 transition shadow-sm cursor-pointer">
+                                <input type="hidden" id="profilePhotoBase64">
+                            </div>
+                        </div>
+
+                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Full Legal Name</label><input type="text" id="profileName" class="input-premium" required></div>
+                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Phone Number</label><input type="tel" id="profilePhone" placeholder="+91" class="input-premium"></div>
+                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">College / Organization</label><input type="text" id="profileCollege" class="input-premium"></div>
+                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">GitHub / Portfolio Link</label><input type="url" id="profileGithub" class="input-premium" placeholder="https://github.com/yourprofile"></div>
+                        <div class="md:col-span-2"><label class="block text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">About Me (Bio)</label><textarea id="profileBio" rows="3" class="input-premium resize-none" placeholder="I am a software engineer passionate about..."></textarea></div>
+                        
+                        <div class="md:col-span-2 flex justify-end mt-2">
+                            <button type="submit" class="w-full md:w-auto bg-blue-600 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-600/20 text-sm tracking-wide">Save Configuration Data</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="tab-mycourses" class="app-section hidden space-y-6 animate-fade-in">
+                <div class="card-corporate p-6 md:p-10 min-h-[60vh]">
+                    <div class="flex items-center gap-3 mb-6 md:mb-8 border-b border-slate-100 pb-5">
+                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-laptop-code"></i></div>
+                        <h2 class="text-lg md:text-xl font-bold text-slate-900">My Enrolled Programs</h2>
+                    </div>
+                    <div id="myCoursesList" class="grid grid-cols-1 gap-5"></div>
+                </div>
+            </div>
+
+            <div id="tab-explore" class="app-section hidden space-y-6 animate-fade-in">
+                <div class="card-corporate p-6 md:p-10 min-h-[60vh]">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 border-b border-slate-100 pb-5 gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-compass"></i></div>
+                            <h2 class="text-lg md:text-xl font-bold text-slate-900">Upgrade Your Skills</h2>
+                        </div>
+                        <span class="bg-slate-100 text-slate-600 text-[10px] md:text-xs font-bold px-3 py-1.5 md:px-4 md:py-2 rounded-lg border border-slate-200 shadow-sm"><i class="fas fa-shield-alt text-blue-500 mr-1"></i> Secured Payments</span>
+                    </div>
+                    <div id="dashExploreGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"></div>
+                </div>
+            </div>
+
+            <div id="tab-live" class="app-section hidden space-y-6 animate-fade-in">
+                <div class="card-corporate p-6 md:p-10 min-h-[60vh]">
+                    <h2 class="text-lg md:text-xl font-bold text-slate-900 mb-6 md:mb-8 border-b border-slate-100 pb-5">Upcoming Live Sessions</h2>
+                    
+                    <div class="bg-white border border-blue-100 shadow-[0_5px_20px_rgba(37,99,235,0.05)] rounded-2xl p-5 md:p-6 relative overflow-hidden transition hover:border-blue-300">
+                        <div class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-black tracking-widest px-3 py-1 md:px-4 md:py-1.5 rounded-bl-xl animate-pulse">LIVE SOON</div>
+                        <div class="flex flex-col md:flex-row items-start gap-5 md:gap-6">
+                            <div class="w-16 h-16 md:w-20 md:h-20 bg-blue-50 text-blue-600 rounded-2xl flex flex-col items-center justify-center shrink-0 border border-blue-100 mt-2 md:mt-0">
+                                <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest">AUG</span>
+                                <span class="text-xl md:text-2xl font-black">28</span>
+                            </div>
+                            <div class="flex-1 w-full">
+                                <h3 class="text-lg md:text-xl font-bold text-slate-900 mb-2 leading-tight">System Design: Scaling Node.js Servers</h3>
+                                <p class="text-xs md:text-sm text-slate-500 font-medium mb-4"><i class="fas fa-clock mr-1 text-slate-400"></i> 06:00 PM IST | Suyash Rathod</p>
+                                <button onclick="showToast('Classroom link activates 10 mins prior to schedule.')" class="w-full md:w-auto bg-blue-600 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-md hover:bg-blue-700 transition"><i class="fas fa-video mr-2"></i> Join Classroom</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-recordings" class="app-section hidden space-y-6 animate-fade-in">
+                <div class="card-corporate p-6 md:p-10 min-h-[60vh]">
+                    <h2 class="text-lg md:text-xl font-bold text-slate-900 mb-6 md:mb-8 border-b border-slate-100 pb-5">Lecture Archive</h2>
+                    <div class="space-y-4">
+                        <div class="flex flex-col md:flex-row items-start md:items-center justify-between p-4 md:p-5 border border-slate-200 rounded-2xl hover:border-blue-300 hover:shadow-md transition cursor-pointer bg-white" onclick="showToast('Initializing secure DRM video player...', 'success')">
+                            <div class="flex items-center gap-4 w-full">
+                                <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center text-lg md:text-xl shrink-0"><i class="fas fa-play"></i></div>
+                                <div><h4 class="font-bold text-slate-900 text-sm md:text-lg leading-tight">Lec 01: Introduction to Advanced APIs</h4><p class="text-[10px] md:text-xs text-slate-500 font-medium mt-1">Duration: 1h 45m • Core Concepts</p></div>
+                            </div>
+                            <button class="mt-4 md:mt-0 w-full md:w-auto bg-slate-100 text-slate-600 px-6 py-2.5 rounded-lg font-bold text-xs hover:bg-slate-200 transition whitespace-nowrap">Play <i class="fas fa-lock-open text-green-500 ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-notes" class="app-section hidden space-y-6 animate-fade-in">
+                <div class="card-corporate p-6 md:p-10 min-h-[60vh]">
+                    <h2 class="text-lg md:text-xl font-bold text-slate-900 mb-6 md:mb-8 border-b border-slate-100 pb-5">Study Materials</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <div class="p-5 md:p-6 border border-slate-200 rounded-2xl bg-white shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                            <div>
+                                <i class="fas fa-file-pdf text-3xl md:text-4xl text-red-500 mb-3 md:mb-4"></i>
+                                <h4 class="font-bold text-slate-900 text-base md:text-lg mb-1 leading-tight">Enterprise Architecture Cheatsheet</h4>
+                                <p class="text-[10px] md:text-xs text-slate-500 font-medium mb-5 md:mb-6">PDF Document • High Resolution</p>
+                            </div>
+                            <button onclick="showToast('Downloading encrypted file...')" class="w-full bg-blue-50 text-blue-600 py-3 rounded-xl font-bold text-sm hover:bg-blue-600 hover:text-white transition shadow-sm"><i class="fas fa-download mr-2"></i> Secure Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-certificates" class="app-section hidden space-y-6 animate-fade-in">
+                <div class="card-corporate p-6 md:p-10 min-h-[60vh]">
+                    <div class="flex items-center gap-3 mb-6 md:mb-8 border-b border-slate-100 pb-5">
+                        <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-award"></i></div>
+                        <h2 class="text-lg md:text-xl font-bold text-slate-900">Verified Credentials</h2>
+                    </div>
+                    <div id="myCertsList" class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function openSidebar() {
+            document.getElementById('main-sidebar').classList.remove('-translate-x-full');
+            const overlay = document.getElementById('mobile-overlay');
+            overlay.classList.remove('hidden');
+            setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+        }
+
+        function closeSidebar() {
+            document.getElementById('main-sidebar').classList.add('-translate-x-full');
+            const overlay = document.getElementById('mobile-overlay');
+            overlay.classList.add('opacity-0');
+            setTimeout(() => overlay.classList.add('hidden'), 300);
+        }
+
+        function switchTabMobile(tabId) {
+            if(typeof switchAppTab === 'function') switchAppTab(tabId);
+            if(window.innerWidth < 768) closeSidebar();
+        }
+
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || e.key === 'PrintScreen') {
+                e.preventDefault();
+                showToast("Security Alert: Developer tools and screenshots are disabled.", "error");
+            }
+        });
+
+        const securityOverlay = document.getElementById('security-overlay');
+        window.addEventListener('blur', () => { securityOverlay.classList.add('active'); });
+        window.addEventListener('focus', () => { securityOverlay.classList.remove('active'); });
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

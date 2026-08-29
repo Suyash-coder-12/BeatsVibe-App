@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | BeatsVibe Enterprise</title>
+    <link rel="icon" type="image/png" href="logo1.png">
+    
+    <!-- Tailwind & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Razorpay & PDF -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .card-corporate { 
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 10px 15px -3px rgba(0,0,0,0.03); 
+        }
+        .dotted-line { border-bottom: 2px dashed #e2e8f0; margin: 16px 0; }
+        .animate-fade-in { animation: fadeIn 0.4s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-6 right-6 z-[9999] flex flex-col gap-3 w-[90%] md:w-full max-w-sm mx-auto md:mx-0"></div>
+
+    <!-- Corporate Navbar -->
+    <header class="h-20 bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 md:px-10 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='/'">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-black text-white shadow-md">B</div>
+            <span class="font-extrabold tracking-widest text-slate-900 uppercase">BeatsVibe</span>
+        </div>
+        <button onclick="window.location.href='/dashboard'" class="text-sm font-bold text-slate-500 hover:text-blue-600 transition"><i class="fas fa-arrow-left mr-2"></i> Back to Dashboard</button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 md:p-12 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-in">
+        
+        <!-- Left Side: Course Details -->
+        <div class="lg:col-span-2 space-y-8" id="course-info-section">
+            <div class="card-corporate p-8 md:p-10">
+                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">
+                    <i id="c-icon" class="fas fa-layer-group"></i>
+                </div>
+                <h1 id="c-title" class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Loading Program...</h1>
+                <p id="c-desc" class="text-slate-500 text-lg leading-relaxed mb-8">Please wait while we fetch the secure enterprise architecture details.</p>
+                
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <span class="bg-slate-100 text-slate-600 font-bold text-xs px-4 py-2 rounded-lg"><i class="fas fa-certificate text-blue-500 mr-2"></i> ISO Certified</span>
+                    <span class="bg-slate-100 text-slate-600 font-bold text-xs px-4 py-2 rounded-lg"><i class="fas fa-infinity text-green-500 mr-2"></i> Lifetime Access</span>
+                    <span class="bg-slate-100 text-slate-600 font-bold text-xs px-4 py-2 rounded-lg"><i class="fas fa-headset text-purple-500 mr-2"></i> 24/7 Support</span>
+                </div>
+
+                <h3 class="text-xl font-bold text-slate-900 mb-4 border-b border-slate-100 pb-3">What's included in this node?</h3>
+                <ul class="space-y-3 text-slate-600 font-medium text-sm">
+                    <li><i class="fas fa-check-circle text-blue-500 mr-3"></i> Industry-grade practical curriculum</li>
+                    <li><i class="fas fa-check-circle text-blue-500 mr-3"></i> Real-world architecture projects</li>
+                    <li><i class="fas fa-check-circle text-blue-500 mr-3"></i> Premium PDF Notes & Code Repositories</li>
+                    <li><i class="fas fa-check-circle text-blue-500 mr-3"></i> Verified Certificate of Completion signed by Suyash Rathod</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Side: Order Summary & Tax Breakdown (Sticky) -->
+        <div class="relative">
+            <div class="card-corporate p-8 sticky top-28 bg-white border-2 border-blue-50">
+                <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2"><i class="fas fa-file-invoice-dollar text-blue-600"></i> Order Summary</h2>
+                
+                <!-- Pricing Breakdown -->
+                <div class="space-y-4 text-sm font-medium text-slate-600">
+                    <div class="flex justify-between">
+                        <span>Base Price</span>
+                        <span id="price-base" class="text-slate-900 font-bold">₹0.00</span>
+                    </div>
+                    
+                    <div class="flex justify-between text-slate-500">
+                        <span>CGST (9%)</span>
+                        <span id="price-cgst">₹0.00</span>
+                    </div>
+                    
+                    <div class="flex justify-between text-slate-500">
+                        <span>SGST (9%)</span>
+                        <span id="price-sgst">₹0.00</span>
+                    </div>
+                </div>
+
+                <div class="dotted-line"></div>
+
+                <!-- Grand Total -->
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-bold text-slate-900 uppercase tracking-widest">Total Amount</span>
+                    <span id="price-total" class="text-3xl font-black text-blue-600">₹0.00</span>
+                </div>
+                <p class="text-[10px] text-slate-400 text-right mb-8">*Securely processed via Razorpay</p>
+
+                <!-- Dynamic Pay Button -->
+                <button id="checkout-btn" class="w-full bg-slate-900 text-white px-6 py-4 rounded-xl font-bold text-sm shadow-xl shadow-slate-900/20 hover:bg-blue-600 hover:shadow-blue-600/30 transition-all flex justify-center items-center gap-3">
+                    <i class="fas fa-lock text-slate-400"></i> Proceed to Secure Payment
+                </button>
+
+                <div class="mt-6 flex items-center justify-center gap-3 opacity-60">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Visa_2021.svg" class="h-4" alt="Visa">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" class="h-5" alt="Mastercard">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" class="h-5" alt="UPI">
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Firebase & App Script (Important for auth check and payment) -->
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+
+    <!-- 🌟 CORE CALCULATION LOGIC 🌟 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Get Course query from URL (e.g. /course-details?course=mern)
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseQuery = urlParams.get('course');
+            
+            if(!courseQuery) {
+                document.getElementById('c-title').innerText = "Course Not Found!";
+                document.getElementById('c-desc').innerText = "Please go back to the dashboard and select a valid course.";
+                document.getElementById('checkout-btn').disabled = true;
+                document.getElementById('checkout-btn').classList.add('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
+            // 2. Find exact course from the `allCourses` array (which is loaded from app.js)
+            const course = allCourses.find(c => c.title.toLowerCase().includes(courseQuery.toLowerCase()));
+
+            if(course) {
+                // 3. Populate Left Side Content
+                document.getElementById('c-title').innerText = course.title;
+                document.getElementById('c-desc').innerText = course.desc;
+                document.getElementById('c-icon').className = `fas ${course.icon}`;
+
+                // 4. Calculate Taxes (Base + 18% GST)
+                const basePrice = course.numericPrice; 
+                const cgst = Math.round(basePrice * 0.09); // 9% CGST
+                const sgst = Math.round(basePrice * 0.09); // 9% SGST
+                const totalAmount = basePrice + cgst + sgst;
+
+                // 5. Populate Invoice Box
+                document.getElementById('price-base').innerText = `₹${basePrice.toLocaleString('en-IN')}.00`;
+                document.getElementById('price-cgst').innerText = `₹${cgst.toLocaleString('en-IN')}.00`;
+                document.getElementById('price-sgst').innerText = `₹${sgst.toLocaleString('en-IN')}.00`;
+                document.getElementById('price-total').innerText = `₹${totalAmount.toLocaleString('en-IN')}`;
+
+                // 6. Connect "Proceed to Checkout" button to Razorpay function from app.js
+                const checkoutBtn = document.getElementById('checkout-btn');
+                checkoutBtn.onclick = () => {
+                    // Check login status first
+                    const session = localStorage.getItem('beatsvibe_session');
+                    if(!session || session === "null") {
+                        showToast("Authentication required. Redirecting to login...", "error");
+                        setTimeout(() => window.location.href = '/login', 2000);
+                        return;
+                    }
+                    
+                    // Call the main Razorpay payment function from app.js
+                    // Passing the TOTAL AMOUNT (Including GST) so Razorpay charges the exact final amount
+                    processCoursePayment(course.title, totalAmount);
+                };
+
+            } else {
+                document.getElementById('c-title').innerText = "Invalid Program Link";
+                document.getElementById('checkout-btn').disabled = true;
+                document.getElementById('checkout-btn').classList.add('opacity-50');
+            }
+        });
+    </script>
+</body>
+</html>
