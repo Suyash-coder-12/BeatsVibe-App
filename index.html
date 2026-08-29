@@ -43,7 +43,7 @@
 
         .hide-scrollbar::-webkit-scrollbar { display: none; }
 
-        /* 🌟 NEW: Loading Animation & Scroll Animations 🌟 */
+        /* Loading Animation & Scroll Animations */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #ffffff; z-index: 99999;
@@ -66,7 +66,7 @@
 </head>
 <body class="text-slate-900 relative selection:bg-blue-200 overflow-x-hidden">
 
-    <!-- 🌟 NEW: PRELOADER (Loading Animation) 🌟 -->
+    <!-- PRELOADER -->
     <div id="preloader">
         <div class="flex flex-col items-center">
             <div class="loader-spinner mb-4"></div>
@@ -74,9 +74,8 @@
         </div>
     </div>
 
-    <!-- 🎥 CORPORATE VIDEO BACKGROUND WITH ADJUSTED WHITE OVERLAY -->
+    <!-- CORPORATE VIDEO BACKGROUND -->
     <div class="fixed top-0 left-0 w-full h-screen z-[-2] bg-slate-50 overflow-hidden pointer-events-none">
-        <!-- 70% White overlay so the video is clearly visible while keeping text readable -->
         <div class="absolute inset-0 bg-white/70 backdrop-blur-sm z-10"></div>
         <video id="bgVideo" class="w-full h-full object-cover opacity-100" autoplay loop muted playsinline>
             <source src="assets/Background-video.mp4" type="video/mp4">
@@ -85,16 +84,17 @@
 
     <div id="toast-container" class="fixed top-6 right-6 z-[9999] flex flex-col gap-3 w-full px-6 max-w-sm"></div>
 
-    <!-- CORPORATE NAVBAR WITH ALL PAGES -->
+    <!-- ========================================== -->
+    <!-- RESPONSIVE NAVBAR WITH 3-DOTS MOBILE MENU  -->
+    <!-- ========================================== -->
     <nav class="fixed w-full z-50 glass-corporate transition-colors">
         <div class="max-w-7xl mx-auto h-20 flex justify-between items-center px-6">
             <div class="font-bold text-xl tracking-tight flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
-                
                 BeatsVibe <span class="hidden md:inline text-slate-500 font-medium text-sm border-l border-slate-300 pl-3 ml-1">Technologies</span>
             </div>
             
-            <!-- Desktop Links -->
-            <div class="hidden lg:flex gap-8 items-center text-sm font-semibold text-slate-600">
+            <!-- Desktop Links (Hidden on Mobile) -->
+            <div class="hidden md:flex gap-8 items-center text-sm font-semibold text-slate-600">
                 <a href="programs.html" class="hover:text-blue-600 transition">Certifications</a>
                 <a href="#internships" class="hover:text-blue-600 transition">Internships</a>
                 <a href="#reviews" class="hover:text-blue-600 transition">Success Stories</a>
@@ -111,11 +111,25 @@
                 </div>
             </div>
 
+            <!-- Login & Mobile Menu Button -->
             <div class="flex gap-4 items-center">
                 <button id="navAuthBtn" onclick="toggleModal('authModal', true)" class="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-all shadow-md hover:shadow-lg">Student Login</button>
+                
+                <!-- 3-Dots Mobile Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 bg-slate-100 text-slate-700 rounded-xl flex items-center justify-center hover:bg-slate-200 transition text-lg">
+                    <i class="fas fa-ellipsis-vertical"></i>
+                </button>
             </div>
         </div>
     </nav>
+
+    <!-- 🌟 MOBILE DROPDOWN MENU (3-Dots Panel) 🌟 -->
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-x-0 top-20 bg-white border-b border-slate-200 shadow-2xl z-40 p-6 flex flex-col gap-4 animate-fade-in">
+        <a href="programs.html" onclick="toggleMobileMenu()" class="font-bold text-slate-700 py-2 border-b border-slate-100 flex items-center justify-between">Certifications <i class="fas fa-chevron-right text-xs text-slate-400"></i></a>
+        <a href="#internships" onclick="toggleMobileMenu()" class="font-bold text-slate-700 py-2 border-b border-slate-100 flex items-center justify-between">Internships <i class="fas fa-chevron-right text-xs text-slate-400"></i></a>
+        <a href="#reviews" onclick="toggleMobileMenu()" class="font-bold text-slate-700 py-2 border-b border-slate-100 flex items-center justify-between">Success Stories <i class="fas fa-chevron-right text-xs text-slate-400"></i></a>
+        <a href="about.html" onclick="toggleMobileMenu()" class="font-bold text-slate-700 py-2 flex items-center justify-between">Company Info <i class="fas fa-chevron-right text-xs text-slate-400"></i></a>
+    </div>
 
     <!-- CLEAN HERO SECTION -->
     <main id="hero" class="pt-40 pb-24 px-6 text-center relative z-10 min-h-[90vh] flex flex-col justify-center items-center">
@@ -129,13 +143,10 @@
             BeatsVibe Technologies provides enterprise-grade technical education, guaranteed internships, and globally recognized certifications to bridge the gap between academia and industry.
         </p>
         
-        <!-- 🌟 UPDATED: Buttons redirect to new pages 🌟 -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in-up" style="animation-delay: 0.3s;">
-            <!-- Changed to open programs.html -->
             <button onclick="window.location.href='programs.html'" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg text-base">
                 Explore Programs
             </button>
-            <!-- Changed to open know-more.html and changed arrow icon -->
             <button onclick="window.location.href='know-more.html'" class="bg-white text-slate-700 border border-slate-300 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition-all text-base shadow-sm flex items-center justify-center gap-2">
                 Know More <i class="fas fa-arrow-right"></i>
             </button>
@@ -154,7 +165,7 @@
         </div>
     </main>
 
-    <!-- SECTION 1: CERTIFICATION COURSES (Added scroll-reveal class) -->
+    <!-- SECTION 1: CERTIFICATION COURSES -->
     <section id="certifications" class="w-full bg-slate-50 py-24 border-y border-slate-200 relative z-10">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 scroll-reveal">
@@ -329,7 +340,6 @@
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             <div>
                 <div class="font-bold text-xl tracking-tight flex items-center gap-2 mb-6 text-white">
-                    
                     BeatsVibe Technologies
                 </div>
                 <p class="text-sm text-slate-400 leading-relaxed mb-6">Premium technical education, software architecture, and artificial intelligence integration.</p>
@@ -357,49 +367,55 @@
         
         <div class="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-slate-800 text-sm text-slate-500 flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 BeatsVibe Technologies. All rights reserved.</p>
-            <!-- 🌟 ADMIN BUTTON AT BOTTOM 🌟 -->
             <button onclick="toggleModal('adminModal', true)" class="text-slate-600 hover:text-white transition-colors flex items-center gap-2 font-mono text-xs">
                 <i class="fas fa-terminal"></i> root_access
             </button>
         </div>
     </footer>
 
-    <!-- 🔥 STUDENT AUTH MODAL (Admin Hata Diya Yahan Se) 🔥 -->
-    <div id="authModal" class="modal-overlay hidden fixed inset-0 z-[999] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-sm relative border border-slate-200">
-            <button onclick="toggleModal('authModal', false)" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-all"><i class="fas fa-times text-sm"></i></button>
+    <!-- 🔥 FIREBASE CONNECTED STUDENT LOGIN MODAL 🔥 -->
+    <div id="authModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[9999] hidden items-center justify-center p-4 transition-opacity">
+        <div class="bg-white rounded-3xl w-full max-w-[400px] p-8 relative shadow-2xl animate-fade-in">
             
-            <div class="text-center mb-6 border-b border-slate-200 pb-4">
-                <h2 class="text-lg font-bold text-slate-900">Student Access Node</h2>
+            <!-- Close Button -->
+            <button onclick="toggleModal('authModal', false)" class="absolute top-4 right-4 w-8 h-8 bg-slate-100 text-slate-500 rounded-full flex items-center justify-center hover:bg-slate-200 transition">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Title -->
+            <h2 class="text-xl font-bold text-slate-900 text-center mb-6 mt-2 tracking-tight">Student Access Node</h2>
+
+            <!-- Google Login (Wired to app.js signInWithGoogle) -->
+            <button onclick="signInWithGoogle()" class="w-full bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold py-3 rounded-xl transition flex items-center justify-center gap-3 shadow-sm mb-6">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5"> Continue with Google
+            </button>
+
+            <!-- Divider -->
+            <div class="flex items-center justify-between mb-6">
+                <span class="w-1/5 border-b border-slate-200"></span>
+                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">OR EMAIL</span>
+                <span class="w-1/5 border-b border-slate-200"></span>
             </div>
 
-            <div id="auth-student" class="block">
-                <button type="button" onclick="mockGoogleLogin()" class="w-full bg-white border border-slate-300 text-slate-700 py-2.5 rounded-lg font-bold hover:bg-slate-50 transition-all flex items-center justify-center gap-3 mb-4 text-sm shadow-sm">
-                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google"> Continue with Google
-                </button>
+            <!-- Tabs (Wired to app.js toggleLoginType) -->
+            <div class="flex bg-slate-50 rounded-xl p-1 mb-6 border border-slate-100">
+                <button id="toggle-signin" onclick="toggleLoginType('signin')" class="flex-1 py-2.5 rounded-lg bg-white text-blue-600 font-bold text-sm shadow-sm transition-all border border-slate-200/50">Sign In</button>
+                <button id="toggle-signup" onclick="toggleLoginType('signup')" class="flex-1 py-2.5 rounded-lg bg-transparent text-slate-500 font-bold text-sm hover:text-slate-700 transition-all border border-transparent">Sign Up</button>
+            </div>
 
-                <div class="flex items-center gap-3 my-4">
-                    <hr class="flex-1 border-slate-200"><span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Or Email</span><hr class="flex-1 border-slate-200">
-                </div>
-
-                <div class="flex bg-slate-100 p-1 rounded-lg mb-4 border border-slate-200">
-                    <button onclick="toggleLoginType('signin')" id="toggle-signin" class="flex-1 py-1.5 rounded-md bg-white text-blue-600 shadow-sm font-semibold text-xs transition-all">Sign In</button>
-                    <button onclick="toggleLoginType('signup')" id="toggle-signup" class="flex-1 py-1.5 rounded-md text-slate-500 font-semibold text-xs transition-all hover:text-slate-700">Sign Up</button>
+            <!-- Form (Wired to app.js handleStudentAuth) -->
+            <form onsubmit="handleStudentAuth(event)">
+                
+                <!-- Hidden by default, shown when Sign Up is clicked -->
+                <div id="signupNameField" class="hidden mb-4">
+                    <input type="text" id="authName" class="w-full p-3.5 bg-white border border-slate-200 text-slate-800 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition text-sm" placeholder="Full Legal Name">
                 </div>
                 
-                <form onsubmit="handleStudentAuth(event)" class="space-y-3 text-left">
-                    <div id="signupNameField" class="hidden">
-                        <input type="text" id="authName" placeholder="Full Name" class="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg outline-none focus:border-blue-500 transition-all text-sm">
-                    </div>
-                    <div>
-                        <input type="text" id="authId" placeholder="Email Address" class="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg outline-none focus:border-blue-500 transition-all text-sm" required>
-                    </div>
-                    <div>
-                        <input type="password" id="authPass" placeholder="Password" class="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg outline-none focus:border-blue-500 transition-all text-sm" required>
-                    </div>
-                    <button type="submit" id="authSubmitBtn" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-all mt-2 text-sm shadow-md">Login</button>
-                </form>
-            </div>
+                <input type="email" id="authId" class="w-full p-3.5 bg-white border border-slate-200 text-slate-800 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition mb-4 text-sm" placeholder="Email Address" required>
+                <input type="password" id="authPass" class="w-full p-3.5 bg-white border border-slate-200 text-slate-800 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition mb-6 text-sm" placeholder="Password" required>
+                
+                <button type="submit" id="authSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow-md shadow-blue-600/20 text-sm tracking-wide">Login</button>
+            </form>
         </div>
     </div>
 
@@ -423,93 +439,49 @@
     <!-- Scripts -->
     <script src="app.js"></script>
     <script>
-        // 🌟 PRELOADER LOGIC 🌟
+        // Preloader Logic
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
-            // Add a tiny delay so the animation is visible briefly
             setTimeout(() => {
                 preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.visibility = 'hidden';
-                }, 600); // Matches the CSS transition time
+                setTimeout(() => { preloader.style.visibility = 'hidden'; }, 600); 
             }, 300);
         });
 
-        // 🌟 SCROLL ANIMATION LOGIC 🌟
+        // Scroll Animation Logic
         document.addEventListener("DOMContentLoaded", () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
+                    if (entry.isIntersecting) { entry.target.classList.add('visible'); }
                 });
-            }, { threshold: 0.1 }); // Triggers when 10% of element is visible
+            }, { threshold: 0.1 }); 
 
-            document.querySelectorAll('.scroll-reveal').forEach((el) => {
-                observer.observe(el);
-            });
+            document.querySelectorAll('.scroll-reveal').forEach((el) => { observer.observe(el); });
         });
 
-        function mockGoogleLogin() {
-            if (typeof showToast === "function") showToast("Authenticating securely...", "success");
-            setTimeout(() => {
-                const newId = "BV-G" + Math.floor(1000 + Math.random() * 9000);
-                let db = JSON.parse(localStorage.getItem('bv_mock_db')) || {};
-                db[newId] = { 
-                    password: "google_oauth", name: "Google Developer", email: "developer@gmail.com", phone: "", 
-                    education: "College", college: "", profilePic: "https://www.svgrepo.com/show/475656/google-color.svg", 
-                    courses: [], activity: [80, 90, 70, 100, 95, 80, 100] 
-                };
-                localStorage.setItem('bv_mock_db', JSON.stringify(db));
-                localStorage.setItem('beatsvibe_session', JSON.stringify({ id: newId, name: "Google Developer", courses: [] }));
-                window.location.href = "dashboard.html";
-            }, 1200);
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Toggle Login / Signup Form
+        function toggleLoginType(mode) {
+            const isSignIn = mode === 'signin';
+            document.getElementById('signupNameField').classList.toggle('hidden', isSignIn);
+            document.getElementById('authName').required = !isSignIn;
+            
+            document.getElementById('authSubmitBtn').innerText = isSignIn ? 'Login' : 'Sign Up';
+            
+            if(isSignIn) {
+                document.getElementById('toggle-signin').className = "flex-1 py-2.5 rounded-lg bg-white text-blue-600 font-bold text-sm shadow-sm transition-all border border-slate-200/50";
+                document.getElementById('toggle-signup').className = "flex-1 py-2.5 rounded-lg bg-transparent text-slate-500 font-bold text-sm hover:text-slate-700 transition-all border border-transparent";
+            } else {
+                document.getElementById('toggle-signup').className = "flex-1 py-2.5 rounded-lg bg-white text-blue-600 font-bold text-sm shadow-sm transition-all border border-slate-200/50";
+                document.getElementById('toggle-signin').className = "flex-1 py-2.5 rounded-lg bg-transparent text-slate-500 font-bold text-sm hover:text-slate-700 transition-all border border-transparent";
+            }
+            if(typeof currentAuthMode !== 'undefined') currentAuthMode = mode;
         }
     </script>
 </body>
-<!-- 🌟 FIREBASE CONNECTED STUDENT LOGIN MODAL 🌟 -->
-<div id="authModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[9999] hidden items-center justify-center p-4 transition-opacity">
-    <div class="bg-white rounded-3xl w-full max-w-[400px] p-8 relative shadow-2xl animate-fade-in">
-        
-        <!-- Close Button -->
-        <button onclick="toggleModal('authModal', false)" class="absolute top-4 right-4 w-8 h-8 bg-slate-100 text-slate-500 rounded-full flex items-center justify-center hover:bg-slate-200 transition">
-            <i class="fas fa-times"></i>
-        </button>
-
-        <!-- Title -->
-        <h2 class="text-xl font-bold text-slate-900 text-center mb-6 mt-2 tracking-tight">Student Access Node</h2>
-
-        <!-- Google Login (Wired to app.js signInWithGoogle) -->
-        <button onclick="signInWithGoogle()" class="w-full bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold py-3 rounded-xl transition flex items-center justify-center gap-3 shadow-sm mb-6">
-            <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5"> Continue with Google
-        </button>
-
-        <!-- Divider -->
-        <div class="flex items-center justify-between mb-6">
-            <span class="w-1/5 border-b border-slate-200"></span>
-            <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">OR EMAIL</span>
-            <span class="w-1/5 border-b border-slate-200"></span>
-        </div>
-
-        <!-- Tabs (Wired to app.js toggleLoginType) -->
-        <div class="flex bg-slate-50 rounded-xl p-1 mb-6 border border-slate-100">
-            <button id="toggle-signin" onclick="toggleLoginType('signin')" class="flex-1 py-2.5 rounded-lg bg-white text-blue-600 font-bold text-sm shadow-sm transition-all border border-slate-200/50">Sign In</button>
-            <button id="toggle-signup" onclick="toggleLoginType('signup')" class="flex-1 py-2.5 rounded-lg bg-transparent text-slate-500 font-bold text-sm hover:text-slate-700 transition-all border border-transparent">Sign Up</button>
-        </div>
-
-        <!-- Form (Wired to app.js handleStudentAuth) -->
-        <form onsubmit="handleStudentAuth(event)">
-            
-            <!-- Hidden by default, shown when Sign Up is clicked -->
-            <div id="signupNameField" class="hidden mb-4">
-                <input type="text" id="authName" class="w-full p-3.5 bg-white border border-slate-200 text-slate-800 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition text-sm" placeholder="Full Legal Name">
-            </div>
-            
-            <input type="email" id="authId" class="w-full p-3.5 bg-white border border-slate-200 text-slate-800 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition mb-4 text-sm" placeholder="Email Address" required>
-            <input type="password" id="authPass" class="w-full p-3.5 bg-white border border-slate-200 text-slate-800 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition mb-6 text-sm" placeholder="Password" required>
-            
-            <button type="submit" id="authSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow-md shadow-blue-600/20 text-sm tracking-wide">Login</button>
-        </form>
-    </div>
-</div>
 </html>
