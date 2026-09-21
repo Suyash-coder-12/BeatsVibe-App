@@ -30,7 +30,7 @@ const allCourses = [
     { id: "c5", title: "Advanced JavaScript & TS", price: "₹2,999", numericPrice: 2999, icon: "fab fa-js", desc: "Deep dive into JS engines and TypeScript." },
     { id: "c6", title: "Mobile App Dev (Kotlin)", price: "₹3,999", numericPrice: 3999, icon: "fab fa-android", desc: "Native Android architecture." },
     { id: "i1", title: "SDE Internship", price: "₹8,999", numericPrice: 8999, icon: "fa-briefcase", desc: "Live client projects using React and Node.js." },
-    { id: "i2", title: "IoT Internship", price: "₹7,999", numericPrice: 7999, icon: "fa-microchip", desc: "Hardware, Arduino/C++, and smart systems prototyping." }
+    { id: "i2", title: "IoT Internship", price: "₹7,999", numericPrice: 7999, icon: "fa-microchip", desc: "Hardware, Arduino/C++, and smart systems prototyping." },
     { id: "i3", title: "Data Science Internship", price: "₹9,499", numericPrice: 9499, icon: "fa-database", desc: "Data analysis, visualization, and machine learning." }
 ];
 
