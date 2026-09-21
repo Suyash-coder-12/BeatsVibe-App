@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Programs & Certifications | BeatsVibe Technologies</title>
+    <link rel="icon" type="image/png" href="logo1.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .glass-corporate { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid #e2e8f0; }
+        .card-corporate { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+        .card-corporate:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border-color: #cbd5e1; }
+        .text-gradient { background: linear-gradient(135deg, #2563eb 0%, #0891b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="relative selection:bg-blue-200">
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 glass-corporate">
+        <div class="max-w-7xl mx-auto h-20 flex justify-between items-center px-6">
+            <div class="font-bold text-xl flex items-center gap-3 cursor-pointer" onclick="window.location.href='/index'">
+                 BeatsVibe
+            </div>
+            <button onclick="window.location.href='index'" class="bg-slate-100 text-slate-700 px-6 py-2 rounded-lg font-semibold hover:bg-slate-200 transition-all text-sm">Back to Home</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="pt-40 pb-20 bg-white border-b border-slate-200 text-center px-6">
+        <span class="text-blue-600 font-bold text-sm tracking-widest uppercase">Academic Catalog 2026</span>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight mt-4 mb-6">Master the <span class="text-gradient">Ecosystem.</span></h1>
+        <p class="text-slate-500 max-w-2xl mx-auto font-medium text-lg">Browse our comprehensive list of certification courses and live internship cohorts. Designed by industry architects to make you deployment-ready.</p>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-6 py-20">
+        
+        <!-- CERTIFICATIONS -->
+        <div class="mb-20">
+            <div class="flex items-center gap-4 mb-10 border-b border-slate-200 pb-4">
+                <i class="fas fa-certificate text-3xl text-blue-600"></i>
+                <h2 class="text-3xl font-bold text-slate-900">Professional Certifications</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course 1 -->
+                <div class="card-corporate p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-2xl"><i class="fas fa-layer-group"></i></div>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-certificate"></i> Verified Certificate</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">MERN Full-Stack Architecture</h3>
+                    <p class="text-slate-500 text-sm mb-4">Learn MongoDB, Express.js, React, and Node.js by building 5 production-ready applications.</p>
+                    <ul class="text-sm text-slate-600 space-y-2 mb-8 flex-1">
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> RESTful API Design</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> State Management (Redux)</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Authentication & JWT</li>
+                    </ul>
+                    <div class="border-t border-slate-100 pt-6 flex justify-between items-center">
+                        <div><p class="text-xs text-slate-400 font-bold uppercase">Duration</p><p class="font-bold text-slate-900">6 Months</p></div>
+                        <button class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-blue-700 transition" onclick="window.location.href='course-details.html?course=mern'">Syllabus</button>
+                    </div>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="card-corporate p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-14 h-14 bg-cyan-50 text-cyan-600 rounded-xl flex items-center justify-center text-2xl"><i class="fas fa-robot"></i></div>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-certificate"></i> Verified Certificate</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">AI & Machine Learning</h3>
+                    <p class="text-slate-500 text-sm mb-4">Master Python, TensorFlow, and build intelligence engines similar to our NeuroNova AI.</p>
+                    <ul class="text-sm text-slate-600 space-y-2 mb-8 flex-1">
+                        <li><i class="fas fa-check text-cyan-500 mr-2"></i> Neural Networks & NLP</li>
+                        <li><i class="fas fa-check text-cyan-500 mr-2"></i> Data Preprocessing</li>
+                        <li><i class="fas fa-check text-cyan-500 mr-2"></i> Model Deployment</li>
+                    </ul>
+                    <div class="border-t border-slate-100 pt-6 flex justify-between items-center">
+                        <div><p class="text-xs text-slate-400 font-bold uppercase">Duration</p><p class="font-bold text-slate-900">8 Months</p></div>
+                        <button class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-blue-700 transition" onclick="window.location.href='course-details.html?course=ai'">Syllabus</button>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="card-corporate p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-14 h-14 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-2xl"><i class="fas fa-server"></i></div>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-certificate"></i> Verified Certificate</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Cloud & DevOps Engineering</h3>
+                    <p class="text-slate-500 text-sm mb-4">Learn CI/CD, containerization, and cloud architecture required for enterprise scaling.</p>
+                    <ul class="text-sm text-slate-600 space-y-2 mb-8 flex-1">
+                        <li><i class="fas fa-check text-purple-500 mr-2"></i> Docker & Kubernetes</li>
+                        <li><i class="fas fa-check text-purple-500 mr-2"></i> AWS Infrastructure</li>
+                        <li><i class="fas fa-check text-purple-500 mr-2"></i> Linux Server Admin</li>
+                    </ul>
+                    <div class="border-t border-slate-100 pt-6 flex justify-between items-center">
+                        <div><p class="text-xs text-slate-400 font-bold uppercase">Duration</p><p class="font-bold text-slate-900">4 Months</p></div>
+                        <button class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-blue-700 transition" onclick="window.location.href='course-details.html?course=devops'">Syllabus</button>
+                    </div>
+                </div>
+
+                <!-- Course 4 -->
+                <div class="card-corporate p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-14 h-14 bg-red-50 text-red-600 rounded-xl flex items-center justify-center text-2xl"><i class="fas fa-shield-alt"></i></div>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-certificate"></i> Verified Certificate</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Cybersecurity & Forensics</h3>
+                    <p class="text-slate-500 text-sm mb-4">Ethical hacking, penetration testing, network security, and IT forensics.</p>
+                    <ul class="text-sm text-slate-600 space-y-2 mb-8 flex-1">
+                        <li><i class="fas fa-check text-red-500 mr-2"></i> Network Vulnerabilities</li>
+                        <li><i class="fas fa-check text-red-500 mr-2"></i> Threat Mitigation</li>
+                        <li><i class="fas fa-check text-red-500 mr-2"></i> Incident Response</li>
+                    </ul>
+                    <div class="border-t border-slate-100 pt-6 flex justify-between items-center">
+                        <div><p class="text-xs text-slate-400 font-bold uppercase">Duration</p><p class="font-bold text-slate-900">6 Months</p></div>
+                        <button class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-blue-700 transition" onclick="window.location.href='course-details.html?course=cybersecurity'">Syllabus</button>
+                    </div>
+                </div>
+                
+                <!-- Course 5 -->
+                <div class="card-corporate p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-14 h-14 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-2xl"><i class="fas fa-chart-line"></i></div>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-certificate"></i> Verified Certificate</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Data Science & Analytics</h3>
+                    <p class="text-slate-500 text-sm mb-4">Extract insights from large datasets using Python, Pandas, and advanced data visualization libraries.</p>
+                    <ul class="text-sm text-slate-600 space-y-2 mb-8 flex-1">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Pandas & NumPy</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Data Visualization</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Statistical Analysis</li>
+                    </ul>
+                    <div class="border-t border-slate-100 pt-6 flex justify-between items-center">
+                        <div><p class="text-xs text-slate-400 font-bold uppercase">Duration</p><p class="font-bold text-slate-900">5 Months</p></div>
+                        <button class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-blue-700 transition" onclick="window.location.href='course-details.html?course=data-science'">Syllabus</button>
+                    </div>
+                </div>
+
+                <!-- Course 6 -->
+                <div class="card-corporate p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-2xl"><i class="fab fa-bitcoin"></i></div>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-certificate"></i> Verified Certificate</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Blockchain & Web3 Dev</h3>
+                    <p class="text-slate-500 text-sm mb-4">Build decentralized applications (dApps), smart contracts with Solidity.</p>
+                    <ul class="text-sm text-slate-600 space-y-2 mb-8 flex-1">
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> Smart Contracts</li>
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> Web3.js & Ethers.js</li>
+                        <li><i class="fas fa-check text-indigo-500 mr-2"></i> dApp Deployment</li>
+                    </ul>
+                    <div class="border-t border-slate-100 pt-6 flex justify-between items-center">
+                        <div><p class="text-xs text-slate-400 font-bold uppercase">Duration</p><p class="font-bold text-slate-900">4 Months</p></div>
+                        <button class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-blue-700 transition" onclick="window.location.href='course-details.html?course=blockchain'">Syllabus</button>
+                    </div>
+                </div>
+
+                <!-- Course 7 -->
+                <div class="card-corporate p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-14 h-14 bg-pink-50 text-pink-600 rounded-xl flex items-center justify-center text-2xl"><i class="fas fa-paint-brush"></i></div>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-certificate"></i> Verified Certificate</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">UI/UX Design Masterclass</h3>
+                    <p class="text-slate-500 text-sm mb-4">Learn user research, wireframing, prototyping, and high-fidelity design.</p>
+                    <ul class="text-sm text-slate-600 space-y-2 mb-8 flex-1">
+                        <li><i class="fas fa-check text-pink-500 mr-2"></i> Figma & Adobe XD</li>
+                        <li><i class="fas fa-check text-pink-500 mr-2"></i> User Research</li>
+                        <li><i class="fas fa-check text-pink-500 mr-2"></i> Interaction Design</li>
+                    </ul>
+                    <div class="border-t border-slate-100 pt-6 flex justify-between items-center">
+                        <div><p class="text-xs text-slate-400 font-bold uppercase">Duration</p><p class="font-bold text-slate-900">3 Months</p></div>
+                        <button class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-blue-700 transition" onclick="window.location.href='course-details.html?course=ui-ux'">Syllabus</button>
+                    </div>
+                </div>
+
+                <!-- Course 8 -->
+                <div class="card-corporate p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-14 h-14 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center text-2xl"><i class="fas fa-brain"></i></div>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-certificate"></i> Verified Certificate</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Generative AI & Prompting</h3>
+                    <p class="text-slate-500 text-sm mb-4">Master large language models, prompt engineering, and API integrations.</p>
+                    <ul class="text-sm text-slate-600 space-y-2 mb-8 flex-1">
+                        <li><i class="fas fa-check text-teal-500 mr-2"></i> LLM APIs (OpenAI)</li>
+                        <li><i class="fas fa-check text-teal-500 mr-2"></i> LangChain Apps</li>
+                        <li><i class="fas fa-check text-teal-500 mr-2"></i> Prompt Engineering</li>
+                    </ul>
+                    <div class="border-t border-slate-100 pt-6 flex justify-between items-center">
+                        <div><p class="text-xs text-slate-400 font-bold uppercase">Duration</p><p class="font-bold text-slate-900">5 Months</p></div>
+                        <button class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-blue-700 transition" onclick="window.location.href='course-details.html?course=generative-ai'">Syllabus</button>
+                    </div>
+                </div>
+
+                <!-- Course 9 -->
+                <div class="card-corporate p-8 flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-14 h-14 bg-blue-50 text-blue-800 rounded-xl flex items-center justify-center text-2xl"><i class="fab fa-python"></i></div>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-certificate"></i> Verified Certificate</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Advanced Python Automation</h3>
+                    <p class="text-slate-500 text-sm mb-4">Automate tasks, build web scrapers, and manage servers using Python.</p>
+                    <ul class="text-sm text-slate-600 space-y-2 mb-8 flex-1">
+                        <li><i class="fas fa-check text-blue-800 mr-2"></i> Web Scraping</li>
+                        <li><i class="fas fa-check text-blue-800 mr-2"></i> Scripting Basics</li>
+                        <li><i class="fas fa-check text-blue-800 mr-2"></i> API Integration</li>
+                    </ul>
+                    <div class="border-t border-slate-100 pt-6 flex justify-between items-center">
+                        <div><p class="text-xs text-slate-400 font-bold uppercase">Duration</p><p class="font-bold text-slate-900">2 Months</p></div>
+                        <button class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-blue-700 transition" onclick="window.location.href='course-details.html?course=python-automation'">Syllabus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERNSHIPS -->
+        <div>
+            <div class="flex items-center gap-4 mb-10 border-b border-slate-200 pb-4">
+                <i class="fas fa-briefcase text-3xl text-slate-800"></i>
+                <h2 class="text-3xl font-bold text-slate-900">Live Internship Cohorts</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-corporate p-8 border-l-4 border-l-blue-600 bg-white">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-3">Software Development Intern (SDE)</h3>
+                    <p class="text-slate-600 mb-6">Join our internal engineering team. You will be assigned to build active modules for real-world clients using React and Node.js. Daily standups and strict code reviews included.</p>
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="bg-slate-100 px-3 py-1 rounded text-xs font-bold text-slate-600">Experience Letter</span>
+                        <span class="bg-slate-100 px-3 py-1 rounded text-xs font-bold text-slate-600">PPO Opportunity</span>
+                        <span class="bg-slate-100 px-3 py-1 rounded text-xs font-bold text-slate-600">Live Codebase</span>
+                    </div>
+                    <button class="w-full bg-slate-900 text-white py-3 rounded-lg font-bold hover:bg-slate-800 transition" onclick="window.location.href='course-details.html?course=sde-intern'">Check Eligibility</button>
+                </div>
+
+                <div class="card-corporate p-8 border-l-4 border-l-cyan-500 bg-white">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-3">IoT & Hardware Architect Intern</h3>
+                    <p class="text-slate-600 mb-6">Work on core engineering hardware. Program microcontrollers (Arduino/C++), design circuit logic, and help prototype autonomous kiosks and smart systems.</p>
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="bg-slate-100 px-3 py-1 rounded text-xs font-bold text-slate-600">Hardware Access</span>
+                        <span class="bg-slate-100 px-3 py-1 rounded text-xs font-bold text-slate-600">Patent Support</span>
+                        <span class="bg-slate-100 px-3 py-1 rounded text-xs font-bold text-slate-600">C++ / Embedded</span>
+                    </div>
+                    <button class="w-full bg-slate-900 text-white py-3 rounded-lg font-bold hover:bg-slate-800 transition" onclick="window.location.href='course-details.html?course=iot-intern'">Check Eligibility</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-10 text-center border-t border-slate-800">
+        <p>&copy; 2026 BeatsVibe Technologies. All rights reserved.</p>
+    </footer>
+</body>
+</html>

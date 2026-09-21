@@ -19,23 +19,23 @@ app.use(express.static(__dirname));
 // 2. BULLETPROOF URL ROUTING
 // ==========================================
 // Home Page
-app.get(['/', '/index.html'], (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get(['/', '/index.html', '/index'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/index.html')));
 
 // Dashboard
-app.get(['/dashboard', '/dashboard.html'], (req, res) => res.sendFile(path.join(__dirname, 'dashboard.html')));
+app.get(['/dashboard', '/dashboard.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/dashboard.html')));
 
 // Course Details Page
-app.get(['/course-details', '/course-details.html'], (req, res) => res.sendFile(path.join(__dirname, 'course-details.html')));
+app.get(['/course-details', '/course-details.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/course-details.html')));
 
 // Auth Pages (Login & Register)
-app.get(['/login', '/login.html'], (req, res) => res.sendFile(path.join(__dirname, 'login.html')));
-app.get(['/register', '/register.html'], (req, res) => res.sendFile(path.join(__dirname, 'register.html')));
+app.get(['/login', '/login.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/login.html')));
+app.get(['/register', '/register.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/register.html')));
 
 // Programs Store
-app.get(['/programs', '/programs.html'], (req, res) => res.sendFile(path.join(__dirname, 'programs.html')));
+app.get(['/programs', '/programs.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/programs.html')));
 
 // 🌟 Root Admin Portal 🌟
-app.get(['/admin', '/admin.html'], (req, res) => res.sendFile(path.join(__dirname, 'admin.html')));
+app.get(['/admin', '/admin.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/admin.html')));
 
 // ==========================================
 // 3. RAZORPAY INITIALIZATION
