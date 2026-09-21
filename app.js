@@ -58,7 +58,13 @@ function toggleLoginType(mode) {
 }
 
 async function signInWithGoogle() {
-    if(!auth) return showToast("Firebase API missing.", "error");
+    if(!auth) {
+        showToast("Mock Google Auth (Firebase Missing)", "success");
+        const userData = { uid: "test-uid-google", studentId: "BV-" + Math.floor(1000 + Math.random() * 9000), name: "Google User", email: "test@google.com", photo: "", courses: [] };
+        localStorage.setItem('beatsvibe_session', JSON.stringify(userData));
+        setTimeout(() => window.location.href = "/dashboard", 1000);
+        return;
+    }
     try {
         const result = await auth.signInWithPopup(googleProvider);
         const docRef = firestoreDb.collection("students").doc(result.user.uid);
@@ -77,6 +83,22 @@ async function handleStudentAuth(event) {
     event.preventDefault();
     const email = document.getElementById('authId').value.trim();
     const pass = document.getElementById('authPass').value.trim();
+
+    if(!auth || !firestoreDb) {
+        showToast("Mock Auth Mode (Firebase Disabled)", "success");
+        let userData;
+        if (currentAuthMode === 'signup') {
+            const name = document.getElementById('authName').value.trim();
+            if (!name) return showToast("Name required.", "error");
+            userData = { uid: "test-uid-" + Date.now(), studentId: "BV-" + Math.floor(1000+Math.random()*9000), name: name, email: email, photo: "", courses: [] };
+        } else {
+            userData = { uid: "test-uid-default", studentId: "BV-1234", name: email.split('@')[0], email: email, photo: "", courses: [] };
+        }
+        localStorage.setItem('beatsvibe_session', JSON.stringify(userData));
+        setTimeout(() => window.location.href = "/dashboard", 1000);
+        return;
+    }
+
     if(auth && firestoreDb) {
         if (currentAuthMode === 'signup') {
             const name = document.getElementById('authName').value.trim();
@@ -113,14 +135,16 @@ function logout() { if(auth) auth.signOut(); localStorage.removeItem('beatsvibe_
 function enterLab(courseName) {
     const overlay = document.getElementById('lab-overlay');
     if(!overlay) return; overlay.style.display = 'flex';
-    setTimeout(() => { window.location.href = "/" + courseName.toLowerCase().replace(/[^a-z0-9]+/g, '-') + ".html"; }, 2000);
+    setTimeout(() => { window.location.href = "/" + courseName.toLowerCase().replace(/[^a-z0-9]+/g, '-'); }, 2000);
 }
 
 function switchAppTab(tabId) {
     document.querySelectorAll('.app-section').forEach(el => el.classList.add('hidden'));
     document.getElementById('tab-' + tabId).classList.remove('hidden');
-    document.querySelectorAll('.sidebar-btn').forEach(btn => { btn.classList.remove('bg-blue-600/10', 'text-blue-600', 'border-blue-600'); btn.classList.add('text-slate-500', 'border-transparent'); });
-    document.getElementById('nav-' + tabId).classList.add('bg-blue-600/10', 'text-blue-600', 'border-blue-600');
+    document.querySelectorAll('.sidebar-btn').forEach(btn => { btn.classList.remove('bg-blue-500/15', 'text-blue-400', 'border-blue-500/30', 'hover:shadow-lg'); btn.classList.add('text-slate-400', 'hover:bg-slate-800', 'hover:text-white', 'border-transparent'); });
+    const activeBtn = document.getElementById('nav-' + tabId);
+    activeBtn.classList.remove('text-slate-400', 'hover:bg-slate-800', 'hover:text-white', 'border-transparent');
+    activeBtn.classList.add('bg-blue-500/15', 'text-blue-400', 'border-blue-500/30', 'hover:shadow-lg');
 }
 
 async function loadDashboardData() {

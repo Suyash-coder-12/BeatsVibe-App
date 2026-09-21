@@ -1,2 +1,8 @@
-frontends/** linguist-detectable=false
-backends/** linguist-detectable=false
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+*.js linguist-detectable=false
+*.json linguist-detectable=false
+*.asm linguist-detectable=true
+*.cpp linguist-detectable=true
+*.c linguist-detectable=true
+*.rs linguist-detectable=true

@@ -21,21 +21,29 @@ app.use(express.static(__dirname));
 // Home Page
 app.get(['/', '/index.html', '/index'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/index.html')));
 
-// Dashboard
-app.get(['/dashboard', '/dashboard.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/dashboard.html')));
+// Dynamic Route Resolver for any page (e.g. /about maps to frontends/jinja2/about.html)
+app.get('/:page', (req, res, next) => {
+    // Skip API routes and actual file requests (like CSS/JS)
+    if (req.url.startsWith('/api') || req.params.page.includes('.')) {
+        return next();
+    }
 
-// Course Details Page
-app.get(['/course-details', '/course-details.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/course-details.html')));
-
-// Auth Pages (Login & Register)
-app.get(['/login', '/login.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/login.html')));
-app.get(['/register', '/register.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/register.html')));
-
-// Programs Store
-app.get(['/programs', '/programs.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/programs.html')));
-
-// 🌟 Root Admin Portal 🌟
-app.get(['/admin', '/admin.html'], (req, res) => res.sendFile(path.join(__dirname, 'frontends/jinja2/admin.html')));
+    const pageName = req.params.page;
+    const filePath = path.join(__dirname, 'frontends/jinja2', `${pageName}.html`);
+    
+    const fs = require('fs');
+    if (fs.existsSync(filePath)) {
+        return res.sendFile(filePath);
+    }
+    
+    // Check if 404.html exists
+    const notFoundPath = path.join(__dirname, 'frontends/jinja2/404.html');
+    if (fs.existsSync(notFoundPath)) {
+        return res.status(404).sendFile(notFoundPath);
+    } else {
+        return res.status(404).send("<h2>404 - BeatsVibe Page Not Found</h2>");
+    }
+});
 
 // ==========================================
 // 3. RAZORPAY INITIALIZATION

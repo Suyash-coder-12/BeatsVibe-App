@@ -42,10 +42,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const user = JSON.parse(localStorage.getItem('beatsvibe_session'));
-            if (!user) return window.location.href = "index.html";
+            if (!user) return window.location.href = "/";
             const courseName = new URLSearchParams(window.location.search).get('course');
             if (!courseName || !user.courses.includes(courseName)) {
-                alert("Access Denied!"); window.location.href = "dashboard.html"; return;
+                alert("Access Denied!"); window.location.href = "/dashboard"; return;
             }
             document.getElementById('lessonTitle').innerText = courseName;
             if (typeof loadCourseData === "function") loadCourseData(courseName);

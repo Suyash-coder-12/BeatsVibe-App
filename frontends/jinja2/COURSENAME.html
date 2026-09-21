@@ -22,8 +22,8 @@ function enterLab(courseName) {
         if(logIndex < logMessages.length) { logs.innerText = logMessages[logIndex]; logIndex++; }
     }, 600);
 
-    // Dynamic URL Slug generation (e.g., "MERN Architecture" -> "/mern-architecture.html")
-    const courseSlug = "/" + courseName.toLowerCase().replace(/[^a-z0-9]+/g, '-') + ".html";
+    // Dynamic URL Slug generation (e.g., "MERN Architecture" -> "/mern-architecture")
+    const courseSlug = "/" + courseName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
     const progInterval = setInterval(() => {
         if(width >= 100) {
